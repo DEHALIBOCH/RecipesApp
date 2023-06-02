@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Easy Meal</string>
+    <string name="welcome_activity_background_description">Welcome Activity background image.</string>
+    <string name="welcome_activity_title_text">Let’s\nCooking</string>
+    <string name="welcome_activity_main_text">Find best recipes for cooking</string>
+    <string name="start_cooking">Start cooking</string>
 </resources>
