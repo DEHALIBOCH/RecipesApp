@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="#58000000">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/welcome_activity_background_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/welcome_activity_background" />
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:lineSpacingExtra="12sp"
+        android:text="@string/welcome_activity_title_text"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="67sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/main_text_view"
+        app:layout_constraintEnd_toEndOf="@+id/main_text_view"
+        app:layout_constraintStart_toStartOf="@+id/main_text_view" />
+
+    <TextView
+        android:id="@+id/main_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcome_activity_main_text"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_start_cooking"
+        app:layout_constraintEnd_toEndOf="@+id/button_start_cooking"
+        app:layout_constraintStart_toStartOf="@+id/button_start_cooking" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_start_cooking"
+        style="@style/ButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_welcome_activity"
+        android:drawableEnd="@drawable/arrow_right"
+        android:text="@string/start_cooking"
+        android:layout_marginBottom="180dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
