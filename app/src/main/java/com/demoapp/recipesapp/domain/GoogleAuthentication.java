@@ -1,4 +1,4 @@
-package com.demoapp.recipesapp;
+package com.demoapp.recipesapp.domain;
 
 public class GoogleAuthentication {
 }

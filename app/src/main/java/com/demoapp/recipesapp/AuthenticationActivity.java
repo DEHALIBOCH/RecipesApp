@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.demoapp.recipesapp.data.User;
 import com.demoapp.recipesapp.databinding.ActivityAuthenticationBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class AuthenticationActivity extends AppCompatActivity {
@@ -97,11 +99,16 @@ public class AuthenticationActivity extends AppCompatActivity {
      */
     private void signInUserToFirebase(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        String email = account.getEmail();
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     // Успешная авторизация в файрбейз
+                    FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                    String uid = firebaseUser.getUid();
+                    User user = createCurrentUserByEmailAndUID(email, uid);
+
                     Intent intent = new Intent(AuthenticationActivity.this, MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -115,4 +122,17 @@ public class AuthenticationActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Создает пользователя с помощью email и uid при аутентификации с помощью Google.
+     *
+     * @param email email пользователя полученный из аккаунта google.
+     * @param uid uid пользователя создаваемое firebase.
+     * @return Возвращает юзера.
+     */
+    private User createCurrentUserByEmailAndUID(String email, String uid) {
+        return new User(email, uid);
+    }
+
+
 }
