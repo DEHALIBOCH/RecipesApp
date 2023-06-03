@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.demoapp.recipesapp.data.User;
 import com.demoapp.recipesapp.databinding.ActivityAuthenticationBinding;
+import com.demoapp.recipesapp.domain.firebase.FirebaseCallback;
+import com.demoapp.recipesapp.domain.firebase.FirebaseUtils;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -31,6 +33,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     private ActivityAuthenticationBinding binding;
     private FirebaseAuth firebaseAuth;
     private GoogleSignInClient googleSignInClient;
+    private FirebaseUtils firebaseUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +44,10 @@ public class AuthenticationActivity extends AppCompatActivity {
         // Экземпляр аутентификации firebase
         firebaseAuth = FirebaseAuth.getInstance();
 
-        GoogleSignInOptions googleSignInOptions =
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .build();
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
 
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
+        firebaseUtils = new FirebaseUtils();
 
         binding.signInWithGoogleButton.setOnClickListener(view -> {
             signInGoogle();
@@ -65,15 +65,12 @@ public class AuthenticationActivity extends AppCompatActivity {
     /**
      * Получение результата из Activity.
      */
-    private final ActivityResultLauncher<Intent> startForResultGoogleAuthentication =
-            registerForActivityResult(
-                    new ActivityResultContracts.StartActivityForResult(),
-                    result -> {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
-                            handleResult(task);
-                        }
-                    });
+    private final ActivityResultLauncher<Intent> startForResultGoogleAuthentication = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == Activity.RESULT_OK) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(result.getData());
+            handleResult(task);
+        }
+    });
 
     /**
      * Метод для обработки результата, полученного из активити авторизации с помощью аккаунта Google.
@@ -84,7 +81,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         if (task.isSuccessful()) {
             GoogleSignInAccount account = task.getResult();
             if (account != null) {
-                signInUserToFirebase(account);
+                signInUserToFirebaseWithGoogle(account);
             }
         } else {
             Log.d(TAG, "Auth error", task.getException());
@@ -97,42 +94,38 @@ public class AuthenticationActivity extends AppCompatActivity {
      *
      * @param account авторизованный аккаунт с помощью Google.
      */
-    private void signInUserToFirebase(GoogleSignInAccount account) {
+    private void signInUserToFirebaseWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         String email = account.getEmail();
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    // Успешная авторизация в файрбейз
+                if (task.isSuccessful()) {  // Успешная авторизация в файрбейз
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                     String uid = firebaseUser.getUid();
-                    User user = createCurrentUserByEmailAndUID(email, uid);
-
-                    Intent intent = new Intent(AuthenticationActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    User user = new User(email, uid);
+                    isUserAlreadyExistsInDB(user);
                 } else {
                     Log.d(TAG, "Auth error", task.getException());
-                    Toast.makeText(
-                            AuthenticationActivity.this,
-                            getString(R.string.auth_error),
-                            Toast.LENGTH_SHORT
-                    ).show();
+                    Toast.makeText(AuthenticationActivity.this, getString(R.string.auth_error), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    /**
-     * Создает пользователя с помощью email и uid при аутентификации с помощью Google.
-     *
-     * @param email email пользователя полученный из аккаунта google.
-     * @param uid uid пользователя создаваемое firebase.
-     * @return Возвращает юзера.
-     */
-    private User createCurrentUserByEmailAndUID(String email, String uid) {
-        return new User(email, uid);
-    }
+    private void isUserAlreadyExistsInDB(User currentUser) {
+        firebaseUtils.isCurrentUserAlreadyInDatabase(currentUser, new FirebaseCallback() {
+            @Override
+            public void successful() {
+                Intent intent = new Intent(AuthenticationActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
 
+            @Override
+            public void unsuccessful() {
+                Toast.makeText(AuthenticationActivity.this, getString(R.string.database_error), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }
