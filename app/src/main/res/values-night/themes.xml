@@ -3,9 +3,10 @@
     <style name="Base.Theme.RecipesApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimaryDark">@color/primary_40</item>
     </style>
 
-    <style name="WelcomeActivityTheme" parent="Base.Theme.RecipesApp">
+    <style name="WelcomeActivityTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Status bar color -->
         <item name="colorPrimaryDark">@color/black</item>
     </style>

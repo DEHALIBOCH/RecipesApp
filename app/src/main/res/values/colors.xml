@@ -5,8 +5,16 @@
     <color name="primary_100">#711F1F</color>
     <color name="primary_80">#9E2B2B</color>
     <color name="primary_60">#CB3838</color>
+    <color name="primary_50">#E23E3E</color>
     <color name="primary_40">#E86565</color>
+    <color name="primary_30">#EE8B8B</color>
     <color name="primary_20">#F3B2B2</color>
     <color name="primary_0">#FCECEC</color>
+    <color name="secondary_100">#804E00</color>
+    <color name="secondary_80">#B36D00</color>
+    <color name="secondary_60">#D58200</color>
+    <color name="secondary_40">#FFA61A</color>
+    <color name="secondary_30">#FFBA4D</color>
+    <color name="secondary_10">#FFDEAA</color>
 
 </resources>
