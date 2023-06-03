@@ -124,11 +124,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         firebaseUtils.isCurrentUserAlreadyInDatabase(currentUser, new FirebaseCallback() {
             @Override
             public void successful() {
-                removeProgressBar();
-                Intent intent = new Intent(AuthenticationActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
+                successfulAuth();
             }
 
             @Override
@@ -170,6 +166,45 @@ public class AuthenticationActivity extends AppCompatActivity {
         binding.signInButton.setEnabled(isEnabled);
         binding.signInWithGoogleButton.setEnabled(isEnabled);
         binding.signUpTextView.setEnabled(isEnabled);
+    }
+
+    private void signInWithEmailAndPassword() {
+        boolean flag = true;
+        String email = String.valueOf(binding.emailEditTextAuth.getText());
+        String password = String.valueOf(binding.passwdEditTextAuth.getText());
+
+        if (email.isBlank()) {
+            flag = false;
+            binding.emailEditTextAuth.setError(getString(R.string.empty_input_field));
+        }
+        if (password.isBlank()) {
+            flag = false;
+            binding.passwdEditTextAuth.setError(getString(R.string.empty_input_field));
+        }
+
+        if (!flag) {
+            return;
+        }
+
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    successfulAuth();
+                } else {
+                    removeProgressBar();
+                    Toast.makeText(AuthenticationActivity.this, getString(R.string.auth_fail), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void successfulAuth() {
+        removeProgressBar();
+        Intent intent = new Intent(AuthenticationActivity.this, MainActivity.class);
+        // Убирает все предидущие активити из бэкстека
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 }
