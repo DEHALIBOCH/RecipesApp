@@ -11,4 +11,8 @@
     <string name="auth_activity_title">Welcome,\nSigh In to continue</string>
     <string name="sign_in_google">Sign In with Google</string>
     <string name="auth_error">Authentication error, please try later.</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_registered">Already Registered , Sign In !</string>
+    <string name="retype_password">Retype Your Password</string>
+    <string name="register_activity_title">Welcome,\nSigh Up to continue</string>
 </resources>
