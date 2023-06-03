@@ -9,4 +9,5 @@
     <string name="type_passwd">Type Your Password</string>
     <string name="type_email">Type your Email</string>
     <string name="auth_activity_title">Welcome,\nSigh In to continue</string>
+    <string name="sign_in_google">Sign In with Google</string>
 </resources>
