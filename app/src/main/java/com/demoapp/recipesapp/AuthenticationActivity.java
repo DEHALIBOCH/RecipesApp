@@ -52,6 +52,11 @@ public class AuthenticationActivity extends AppCompatActivity {
         binding.signInWithGoogleButton.setOnClickListener(view -> {
             signInGoogle();
         });
+
+        binding.signUpTextView.setOnClickListener(view -> {
+            Intent intent = new Intent(AuthenticationActivity.this, RegistrationActivity.class);
+            startActivity(intent);
+        });
     }
 
     /**
