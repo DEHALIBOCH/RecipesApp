@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -102,6 +103,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     private void signInUserToFirebaseWithGoogle(GoogleSignInAccount account) {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         String email = account.getEmail();
+        showProgressBar();
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -122,15 +124,52 @@ public class AuthenticationActivity extends AppCompatActivity {
         firebaseUtils.isCurrentUserAlreadyInDatabase(currentUser, new FirebaseCallback() {
             @Override
             public void successful() {
+                removeProgressBar();
                 Intent intent = new Intent(AuthenticationActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             }
 
             @Override
             public void unsuccessful() {
+                removeProgressBar();
                 Toast.makeText(AuthenticationActivity.this, getString(R.string.database_error), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    /**
+     * Показывает progressBar и убирает возможность взаимодействия с элементами пользовательского
+     * интерфейса
+     */
+    private void showProgressBar() {
+        binding.getRoot().setForeground(getDrawable(R.drawable.auth_foreground));
+        setEnabledForAllUiElements(false);
+        binding.authProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Убирает progressBar и возвращает возможность взаимодействия с элементами ользовательского
+     * интерфейса
+     */
+    private void removeProgressBar() {
+        binding.getRoot().setForeground(null);
+        setEnabledForAllUiElements(true);
+        binding.authProgressBar.setVisibility(View.GONE);
+    }
+
+    /**
+     * Включает и выключает взаимодействие с элементами экрана
+     *
+     * @param isEnabled
+     */
+    private void setEnabledForAllUiElements(boolean isEnabled) {
+        binding.emailLayout.setEnabled(isEnabled);
+        binding.passwordLayout.setEnabled(isEnabled);
+        binding.signInButton.setEnabled(isEnabled);
+        binding.signInWithGoogleButton.setEnabled(isEnabled);
+        binding.signUpTextView.setEnabled(isEnabled);
     }
 
 }
