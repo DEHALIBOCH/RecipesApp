@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -56,9 +57,27 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         binding.signUpTextView.setOnClickListener(view -> {
             Intent intent = new Intent(AuthenticationActivity.this, RegistrationActivity.class);
-            startActivity(intent);
+            startForResultRegistration.launch(intent);
+        });
+
+        binding.signInButton.setOnClickListener(view -> {
+            signInWithEmailAndPassword();
         });
     }
+
+    private ActivityResultLauncher<Intent> startForResultRegistration = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent extras = result.getData();
+                    if (extras != null) {
+                        String email = extras.getStringExtra(RegistrationActivity.EMAIL_EXTRAS);
+                        String password = extras.getStringExtra(RegistrationActivity.PASSWORD_EXTRAS);
+                        binding.emailEditTextAuth.setText(email, TextView.BufferType.EDITABLE);
+                        binding.passwdEditTextAuth.setText(password, TextView.BufferType.EDITABLE);
+                    }
+                }
+            }
+    );
 
     /**
      * Метод для авторизации через аккаунт Google.
@@ -168,35 +187,47 @@ public class AuthenticationActivity extends AppCompatActivity {
         binding.signUpTextView.setEnabled(isEnabled);
     }
 
+    private void removeErrors() {
+        binding.emailLayout.setError(null);
+        binding.passwordLayout.setError(null);
+    }
+
+    /**
+     * Аутентификация посредствам пароля и электронного адреса.
+     */
     private void signInWithEmailAndPassword() {
+        removeErrors();
+
         boolean flag = true;
-        String email = String.valueOf(binding.emailEditTextAuth.getText());
-        String password = String.valueOf(binding.passwdEditTextAuth.getText());
+        String email = String.valueOf(binding.emailEditTextAuth.getText()).trim();
+        String password = String.valueOf(binding.passwdEditTextAuth.getText()).trim();
 
         if (email.isBlank()) {
             flag = false;
-            binding.emailEditTextAuth.setError(getString(R.string.empty_input_field));
+            binding.emailLayout.setError(getString(R.string.empty_input_field));
         }
         if (password.isBlank()) {
             flag = false;
-            binding.passwdEditTextAuth.setError(getString(R.string.empty_input_field));
+            binding.passwordLayout.setError(getString(R.string.empty_input_field));
         }
 
         if (!flag) {
             return;
         }
 
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    successfulAuth();
-                } else {
-                    removeProgressBar();
-                    Toast.makeText(AuthenticationActivity.this, getString(R.string.auth_fail), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        showProgressBar();
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            successfulAuth();
+                        } else {
+                            removeProgressBar();
+                            Toast.makeText(AuthenticationActivity.this, getString(R.string.auth_fail), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
     private void successfulAuth() {

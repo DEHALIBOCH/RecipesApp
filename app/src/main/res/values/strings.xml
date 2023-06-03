@@ -4,7 +4,7 @@
     <string name="welcome_activity_title_text">Let’s\nCooking</string>
     <string name="welcome_activity_main_text">Find best recipes for cooking</string>
     <string name="start_cooking">Start cooking</string>
-    <string name="not_yet_registered">Not Registered Yet , Sign Up !</string>
+    <string name="not_yet_registered">Not Registered Yet, Sign Up!</string>
     <string name="sign_in">Sign In</string>
     <string name="type_passwd">Type Your Password</string>
     <string name="type_email">Type your Email</string>
@@ -14,8 +14,12 @@
     <string name="auth_fail">Authentication fail, please check entered information or try again later.</string>
     <string name="database_error">Database error, please try again later.</string>
     <string name="sign_up">Sign Up</string>
-    <string name="already_registered">Already Registered , Sign In !</string>
+    <string name="already_registered">Already Registered, Sign In!</string>
     <string name="retype_password">Retype Your Password</string>
     <string name="register_activity_title">Welcome,\nSigh Up to continue</string>
     <string name="empty_input_field">Field is empty</string>
+    <string name="not_valid_password">Password must be at least 6 characters</string>
+    <string name="passwords_dont_match">Passwords don\'t match, please try again.</string>
+    <string name="not_valid_email">A valid email is required</string>
+    <string name="successful_registration">Successful Registration</string>
 </resources>
