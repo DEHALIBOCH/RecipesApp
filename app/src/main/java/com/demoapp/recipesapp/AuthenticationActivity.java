@@ -133,6 +133,7 @@ public class AuthenticationActivity extends AppCompatActivity {
                     isUserAlreadyExistsInDB(user);
                 } else {
                     Log.d(TAG, "Auth error", task.getException());
+                    // TODO - Постараться сделать кастомный Toast, а то этот плохо видно.
                     Toast.makeText(AuthenticationActivity.this, getString(R.string.auth_error), Toast.LENGTH_SHORT).show();
                 }
             }

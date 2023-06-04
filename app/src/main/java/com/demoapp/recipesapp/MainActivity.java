@@ -15,5 +15,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // TODO - начать работу над MainActivity
+        // TODO - посмотреть как хранить файлы в файрбейз
     }
 }
