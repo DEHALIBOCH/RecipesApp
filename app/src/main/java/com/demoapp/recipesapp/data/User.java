@@ -3,7 +3,7 @@ package com.demoapp.recipesapp.data;
 public class User {
     private String name;
     private String lastname;
-    private int age = 0;
+    private int age;
     private String email;
     private String password;
     private String tokenUID;

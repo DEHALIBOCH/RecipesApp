@@ -9,7 +9,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.demoapp.recipesapp.data.User;
 import com.demoapp.recipesapp.databinding.ActivityRegistrationBinding;
+import com.demoapp.recipesapp.domain.firebase.FirebaseCallback;
+import com.demoapp.recipesapp.domain.firebase.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,18 +37,16 @@ public class RegistrationActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         binding.alreadyRegisteredTextView.setOnClickListener(view -> {
-            Intent intent = new Intent(RegistrationActivity.this, AuthenticationActivity.class);
-            // Флаг, чтобы активити не добавилось в бэкстэк.
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             setResult(Activity.RESULT_CANCELED);
-            startActivity(intent);
+            finish();
         });
 
-        binding.signUpButton.setOnClickListener(view -> {
-            registerUser();
-        });
+        binding.signUpButton.setOnClickListener(view -> registerUser());
     }
 
+    /**
+     * Регистрация пользователя.
+     */
     private void registerUser() {
         if (isValidUserInput()) {
             String email = String.valueOf(binding.emailEditTextRegister.getText()).trim();
@@ -55,13 +56,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        removeProgressBar();
-                        Toast.makeText(RegistrationActivity.this, getString(R.string.successful_registration), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent();
-                        intent.putExtra(EMAIL_EXTRAS, email);
-                        intent.putExtra(PASSWORD_EXTRAS, password);
-                        setResult(Activity.RESULT_OK, intent);
-                        finish();
+                        String userUid = task.getResult().getUser().getUid();
+                        User user = new User(email, password, userUid);
+                        addUserToDB(user);
                     } else {
                         removeProgressBar();
                         Toast.makeText(RegistrationActivity.this, getString(R.string.database_error), Toast.LENGTH_SHORT).show();
@@ -161,7 +158,7 @@ public class RegistrationActivity extends AppCompatActivity {
     /**
      * Включает и выключает взаимодействие с элементами экрана
      *
-     * @param isEnabled
+     * @param isEnabled устанавливает булевское значение определяющее включено ли взаимодействие
      */
     private void setEnabledForAllUiElements(boolean isEnabled) {
         binding.emailLayout.setEnabled(isEnabled);
@@ -169,5 +166,27 @@ public class RegistrationActivity extends AppCompatActivity {
         binding.signUpButton.setEnabled(isEnabled);
         binding.confirmPasswordLayout.setEnabled(isEnabled);
         binding.alreadyRegisteredTextView.setEnabled(isEnabled);
+    }
+
+    private void addUserToDB(User currUser) {
+        FirebaseUtils firebaseUtils = new FirebaseUtils();
+        firebaseUtils.addUserToDatabase(currUser, new FirebaseCallback() {
+            @Override
+            public void successful() {
+                removeProgressBar();
+                Toast.makeText(RegistrationActivity.this, getString(R.string.successful_registration), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.putExtra(EMAIL_EXTRAS, currUser.getEmail());
+                intent.putExtra(PASSWORD_EXTRAS, currUser.getPassword());
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
+
+            @Override
+            public void unsuccessful() {
+                removeProgressBar();
+                Toast.makeText(RegistrationActivity.this, getString(R.string.database_error), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

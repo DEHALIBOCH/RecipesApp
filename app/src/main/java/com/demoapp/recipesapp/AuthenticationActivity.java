@@ -51,21 +51,21 @@ public class AuthenticationActivity extends AppCompatActivity {
         googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
         firebaseUtils = new FirebaseUtils();
 
-        binding.signInWithGoogleButton.setOnClickListener(view -> {
-            signInGoogle();
-        });
+        binding.signInWithGoogleButton.setOnClickListener(view -> signInGoogle());
 
         binding.signUpTextView.setOnClickListener(view -> {
             Intent intent = new Intent(AuthenticationActivity.this, RegistrationActivity.class);
             startForResultRegistration.launch(intent);
         });
 
-        binding.signInButton.setOnClickListener(view -> {
-            signInWithEmailAndPassword();
-        });
+        binding.signInButton.setOnClickListener(view -> signInWithEmailAndPassword());
     }
 
-    private ActivityResultLauncher<Intent> startForResultRegistration = registerForActivityResult(
+    /**
+     * Получение результата из экрана регистрации, в случае успешной регистрации эл. адресс и пароль
+     * пользоваетля будут вставленны в поля для входа
+     */
+    private final ActivityResultLauncher<Intent> startForResultRegistration = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
                 if (result.getResultCode() == Activity.RESULT_OK) {
                     Intent extras = result.getData();
@@ -177,7 +177,7 @@ public class AuthenticationActivity extends AppCompatActivity {
     /**
      * Включает и выключает взаимодействие с элементами экрана
      *
-     * @param isEnabled
+     * @param isEnabled устанавливает булевское значение определяющее включено ли взаимодействие
      */
     private void setEnabledForAllUiElements(boolean isEnabled) {
         binding.emailLayout.setEnabled(isEnabled);
