@@ -56,6 +56,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        // Uid - уникальный идентификатор пользователя.
                         String userUid = task.getResult().getUser().getUid();
                         User user = new User(email, password, userUid);
                         addUserToDB(user);
@@ -168,6 +169,12 @@ public class RegistrationActivity extends AppCompatActivity {
         binding.alreadyRegisteredTextView.setEnabled(isEnabled);
     }
 
+    /**
+     * Добавляет пользователя в базу данных, в случае успеха закрывает активити и передает информацию
+     * для автоизации в AuthenticationActivity для удобной авторизации.
+     *
+     * @param currUser текущий зарегистрировавшийся пользователь
+     */
     private void addUserToDB(User currUser) {
         FirebaseUtils firebaseUtils = new FirebaseUtils();
         firebaseUtils.addUserToDatabase(currUser, new FirebaseCallback() {

@@ -20,7 +20,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         firebaseAuth = FirebaseAuth.getInstance();
-        // Не забыть убрать
+        // TODO - Не забыть убрать(сейчас необходима так как нет возможности выйти из аккаунта)
         firebaseAuth.signOut();
 
         binding.buttonStartCooking.setOnClickListener(view -> {
