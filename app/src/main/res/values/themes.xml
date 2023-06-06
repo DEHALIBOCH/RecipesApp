@@ -44,4 +44,13 @@
         <item name="itemIconTint">@drawable/navbar_icons</item>
     </style>
 
+    <style name="TrendingNowRecipeItemImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">25dp</item>
+    </style>
+
+    <style name="CircleShapeableImageView" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

@@ -35,4 +35,6 @@
     <string name="see_all">See all</string>
     <string name="popular_category">Popular category</string>
     <string name="popular_creators">Popular creators</string>
+    <string name="trending_recipes_stars">  %1$.1f</string>
+    <string name="recipe_author">By %1$s</string>
 </resources>

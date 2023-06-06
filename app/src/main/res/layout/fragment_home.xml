@@ -75,7 +75,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trending_recipes_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="296dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/see_all_trending_recipes"
             app:layout_constraintStart_toStartOf="@id/trending_now_text_view"
