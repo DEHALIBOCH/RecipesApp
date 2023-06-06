@@ -1,5 +1,8 @@
 package com.demoapp.recipesapp.domain.firebase;
 
+/**
+ * Интерфейс представляющий из себя коллбек для взаимодействия с базой данных.
+ */
 public interface FirebaseCallback {
 
     /**
