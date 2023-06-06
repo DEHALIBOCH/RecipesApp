@@ -8,12 +8,17 @@ public class User {
     private int age;
     private String email;
     private String password;
-    private String tokenUID; // Уникальный идентификатор, используется для доступа к пользователь в бд
+    private String tokenUID; // Уникальный идентификатор
+
+    private String firebaseKey;
     private String location;
     private String bio;     // Краткое описание профиля, как в инстаграмме
 
     private final ArrayList<String> followers = new ArrayList<>();    // Id подписчики
     private final ArrayList<String> following = new ArrayList<>();    // Id подписок
+
+    public User() {
+    }
 
     public User(String email, String tokenUID) {
         this.email = email;
@@ -105,4 +110,25 @@ public class User {
         return following;
     }
 
+    public String getFirebaseKey() {
+        return firebaseKey;
+    }
+
+    public void setFirebaseKey(String firebaseKey) {
+        this.firebaseKey = firebaseKey;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "\n" +
+                "name='" + name + '\'' + "\n" +
+                ", lastname='" + lastname + '\'' + "\n" +
+                ", age=" + age + "\n" +
+                ", email='" + email + '\'' + "\n" +
+                ", password='" + password + '\'' + "\n" +
+                ", tokenUID='" + tokenUID + '\'' + "\n" +
+                ", firebaseKey='" + firebaseKey + '\'' + "\n" +
+                ", location='" + location + '\'' + "\n" +
+                ", bio='" + bio + '\'' + "\n" + '}';
+    }
 }
