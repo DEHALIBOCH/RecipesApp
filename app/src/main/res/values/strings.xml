@@ -28,4 +28,9 @@
     <string name="profile">Profile</string>
     <string name="add_new_recipe">Add new recipe</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment_title">Find best recipes \nfor cooking</string>
+    <string name="home_fragment_search_hint">Search recipes</string>
+    <string name="voice_search_content_desc">Search recipes with voice</string>
+    <string name="trending_now">Trending now 🔥</string>
+    <string name="see_all">See all</string>
 </resources>
