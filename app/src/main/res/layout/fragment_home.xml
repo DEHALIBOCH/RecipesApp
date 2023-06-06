@@ -23,13 +23,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <SearchView
-            android:layout_marginTop="8dp"
-            android:queryBackground="@null"
             android:id="@+id/search_view"
             android:layout_width="0dp"
-            android:background="@drawable/search_view_background"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/search_view_background"
             android:iconifiedByDefault="false"
+            android:queryBackground="@null"
             android:queryHint="@string/home_fragment_search_hint"
             app:layout_constraintEnd_toStartOf="@id/search_by_voice"
             app:layout_constraintStart_toStartOf="@id/title_text_view"
@@ -51,27 +51,96 @@
             android:id="@+id/trending_now_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/trending_now"
-            android:layout_marginTop="8dp"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_view"/>
+            app:layout_constraintTop_toBottomOf="@id/search_view" />
 
         <TextView
             android:id="@+id/see_all_trending_recipes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/see_all"
+            android:textColor="@color/primary_60"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/primary_60"
-            app:layout_constraintTop_toTopOf="@id/trending_now_text_view"
+            app:drawableEndCompat="@drawable/arrow_right_red"
             app:layout_constraintBottom_toBottomOf="@id/trending_now_text_view"
             app:layout_constraintEnd_toEndOf="parent"
-            android:gravity="center"
-            app:drawableEndCompat="@drawable/arrow_right_red" />
+            app:layout_constraintTop_toTopOf="@id/trending_now_text_view" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/trending_recipes_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@id/see_all_trending_recipes"
+            app:layout_constraintStart_toStartOf="@id/trending_now_text_view"
+            app:layout_constraintTop_toBottomOf="@id/trending_now_text_view" />
+
+        <TextView
+            android:id="@+id/popular_category_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/popular_category"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/trending_recipes_recycler_view"
+            app:layout_constraintTop_toBottomOf="@id/trending_recipes_recycler_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/category_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/popular_category_text_view"
+            app:layout_constraintTop_toBottomOf="@id/popular_category_text_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipe_by_category_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintEnd_toEndOf="@id/category_recycler_view"
+            app:layout_constraintStart_toStartOf="@id/category_recycler_view"
+            app:layout_constraintTop_toBottomOf="@id/category_recycler_view" />
+
+        <TextView
+            android:id="@+id/popular_creators_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/popular_creators"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/recipe_by_category_recycler_view"
+            app:layout_constraintTop_toBottomOf="@id/recipe_by_category_recycler_view" />
+
+        <TextView
+            android:id="@+id/see_all_popular_creators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/see_all"
+            android:textColor="@color/primary_60"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/arrow_right_red"
+            app:layout_constraintBottom_toBottomOf="@id/popular_creators_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/popular_creators_text_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popular_creators_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/popular_creators_text_view"
+            app:layout_constraintTop_toBottomOf="@id/popular_creators_text_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

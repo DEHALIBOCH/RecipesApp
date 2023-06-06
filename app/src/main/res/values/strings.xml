@@ -33,4 +33,6 @@
     <string name="voice_search_content_desc">Search recipes with voice</string>
     <string name="trending_now">Trending now 🔥</string>
     <string name="see_all">See all</string>
+    <string name="popular_category">Popular category</string>
+    <string name="popular_creators">Popular creators</string>
 </resources>
