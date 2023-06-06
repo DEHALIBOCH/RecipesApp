@@ -40,7 +40,8 @@
 
     <style name="BottomNavBar">
         <item name="android:background">@color/primary_20</item>
-        <item name="itemTextColor">@color/primary_100</item>
+        <item name="itemTextColor">@color/white</item>
+        <item name="itemIconTint">@drawable/navbar_icons</item>
     </style>
 
 </resources>
