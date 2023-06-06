@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_fragment_title"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <SearchView
+            android:layout_marginTop="8dp"
+            android:queryBackground="@null"
+            android:id="@+id/search_view"
+            android:layout_width="0dp"
+            android:background="@drawable/search_view_background"
+            android:layout_height="wrap_content"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/home_fragment_search_hint"
+            app:layout_constraintEnd_toStartOf="@id/search_by_voice"
+            app:layout_constraintStart_toStartOf="@id/title_text_view"
+            app:layout_constraintTop_toBottomOf="@id/title_text_view" />
+
+        <ImageButton
+            android:id="@+id/search_by_voice"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/primary_40"
+            android:contentDescription="@string/voice_search_content_desc"
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseline_keyboard_voice_24"
+            app:layout_constraintBottom_toBottomOf="@id/search_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/search_view" />
+
+        <TextView
+            android:id="@+id/trending_now_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/trending_now"
+            android:layout_marginTop="8dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_view"/>
+
+        <TextView
+            android:id="@+id/see_all_trending_recipes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/see_all"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_60"
+            app:layout_constraintTop_toTopOf="@id/trending_now_text_view"
+            app:layout_constraintBottom_toBottomOf="@id/trending_now_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            app:drawableEndCompat="@drawable/arrow_right_red" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
