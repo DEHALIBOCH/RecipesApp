@@ -32,6 +32,8 @@ public class FirebaseUtils {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (!snapshot.hasChildren()) {
                     DatabaseReference push = users.push();
+                    String firebaseKey = push.getKey();
+                    currentUser.setFirebaseKey(firebaseKey);
                     push.setValue(currentUser);
                 }
                 firebaseCallback.successful();
@@ -51,6 +53,8 @@ public class FirebaseUtils {
      */
     public void addUserToDatabase(User currentUser, FirebaseCallback firebaseCallback) {
         DatabaseReference push = users.push();
+        String firebaseKey = push.getKey();
+        currentUser.setFirebaseKey(firebaseKey);
         push.setValue(currentUser).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -62,5 +66,51 @@ public class FirebaseUtils {
                 firebaseCallback.unsuccessful();
             }
         });
+    }
+
+    /**
+     * Метод для того чтобы получить пользователя из базы данных
+     *
+     * @param uid          Идентификатор пользователя которого необходимо получить
+     * @param userCallback коллбек для взаимодействия с юзером, когда данные будут готовы
+     */
+    public void getUserByUID(String uid, UserCallback userCallback) {
+        Query query = users.orderByChild("tokenUID").equalTo(uid);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot document : snapshot.getChildren()) {
+                    User receivedUser = document.getValue(User.class);
+                    userCallback.userReady(receivedUser);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                userCallback.unsuccessful();
+            }
+        });
+    }
+
+    /**
+     * Метод для обновления информации о пользователе.
+     *
+     * @param currentUser
+     * @param firebaseCallback
+     */
+    public void updateUser(User currentUser, FirebaseCallback firebaseCallback) {
+        users.child("tokenUID").setValue(currentUser)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        firebaseCallback.successful();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        firebaseCallback.unsuccessful();
+                    }
+                });
+
     }
 }
