@@ -3,7 +3,9 @@
     <style name="Base.Theme.RecipesApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimaryDark">@color/primary_40</item>
+        <item name="colorPrimary">@color/primary_40</item>
+        <item name="colorPrimaryDark">@color/primary_60</item>
+        <item name="colorAccent">@color/secondary_10</item>
     </style>
 
     <style name="ButtonStyle">
@@ -34,6 +36,11 @@
     <style name="WelcomeActivityTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Status bar color -->
         <item name="colorPrimaryDark">@color/black</item>
+    </style>
+
+    <style name="BottomNavBar">
+        <item name="android:background">@color/primary_20</item>
+        <item name="itemTextColor">@color/primary_100</item>
     </style>
 
 </resources>
