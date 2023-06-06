@@ -31,7 +31,10 @@ public class TrendingNowRecipes extends RecyclerView.Adapter<TrendingNowRecipes.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // TODO дизайн для ресайклера
+        // TODO доделать
+        Recipe currRecipe = recipes.get(position);
+        holder.binding.recipeTitleTextView.setText("");
+        holder.binding.recipeAuthorTextView.setText("");
     }
 
     @Override
