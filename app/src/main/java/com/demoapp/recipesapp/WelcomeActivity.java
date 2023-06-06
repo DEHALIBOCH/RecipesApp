@@ -20,8 +20,6 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         firebaseAuth = FirebaseAuth.getInstance();
-        // TODO - Не забыть убрать(сейчас необходима так как нет возможности выйти из аккаунта)
-        firebaseAuth.signOut();
 
         binding.buttonStartCooking.setOnClickListener(view -> {
             Intent intent = new Intent(WelcomeActivity.this, AuthenticationActivity.class);
