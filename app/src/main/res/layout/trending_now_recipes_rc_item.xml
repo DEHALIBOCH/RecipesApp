@@ -8,7 +8,7 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/recipe_title_image_view"
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="180dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
