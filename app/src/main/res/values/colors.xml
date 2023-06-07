@@ -16,5 +16,6 @@
     <color name="secondary_40">#FFA61A</color>
     <color name="secondary_30">#FFBA4D</color>
     <color name="secondary_10">#FFDEAA</color>
-
+    <color name="neutral_20">#D9D9D9</color>
+    <color name="neutral_10">#F1F1F1</color>
 </resources>
