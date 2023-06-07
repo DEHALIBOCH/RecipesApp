@@ -17,6 +17,21 @@ public class User {
     private final ArrayList<String> followers = new ArrayList<>();    // Id подписчики
     private final ArrayList<String> following = new ArrayList<>();    // Id подписок
 
+    public void addRecipe(Recipe recipe) {
+
+    }
+
+    public ArrayList<String> getRecipes() {
+        return recipes;
+    }
+
+    public ArrayList<String> getSavedRecipes() {
+        return savedRecipes;
+    }
+
+    private final ArrayList<String> recipes = new ArrayList<>();    // Id выложенных рецептов
+    private final ArrayList<String> savedRecipes = new ArrayList<>(); // Id сохраненных рецептов
+
     public User() {
     }
 
