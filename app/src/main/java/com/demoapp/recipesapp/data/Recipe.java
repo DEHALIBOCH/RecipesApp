@@ -13,7 +13,7 @@ public class Recipe {
     private String title;   // Заголовок
     private int serves; // Кол-во порций
     private int cookTime;   // Время приготовления
-    private final HashMap<String, Double> ingredients = new HashMap<>();    // Ингридиенты
+    private final HashMap<String, Integer> ingredients = new HashMap<>();    // Ингридиенты
     private String recipe;  // Рецептура(процесс приготовления)
     private String authorUID; // Идентификатор автора
     private String firebaseKey; // Ключ в файрбейзе
@@ -73,7 +73,7 @@ public class Recipe {
         return cookTime;
     }
 
-    public HashMap<String, Double> getIngredients() {
+    public HashMap<String, Integer> getIngredients() {
         return ingredients;
     }
 

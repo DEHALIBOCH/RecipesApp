@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class TrendingNowRecipes extends RecyclerView.Adapter<TrendingNowRecipes.ViewHolder> {
 
-    private ArrayList<Recipe> recipes;
+    public ArrayList<Recipe> recipes;
 
     public TrendingNowRecipes(ArrayList<Recipe> recipes) {
         this.recipes = recipes;
