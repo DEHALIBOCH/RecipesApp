@@ -50,6 +50,9 @@
     <string name="add_new_ingredient">Add new ingredient</string>
     <string name="save_my_recipe">Save my recipe</string>
     <string name="recipe_process">Recipe process</string>
+    <string name="item_name">Item name</string>
+    <string name="quantity">Quantity</string>
+    <string name="remove_ingredient">Remove ingredient</string>
     <string-array name="recipe_category">
         <item>Appetizer</item>
         <item>Cold platter</item>
