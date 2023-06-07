@@ -277,7 +277,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ingredients_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -298,6 +298,18 @@
             app:layout_constraintStart_toStartOf="@id/ingredients_recycler_view"
             app:layout_constraintTop_toBottomOf="@id/ingredients_recycler_view" />
 
+        <EditText
+            android:id="@+id/recipe_process_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="@string/recipe_process"
+            app:layout_constraintTop_toBottomOf="@id/add_new_ingredient_to_recycler"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/search_view_background"
+            app:layout_constraintStart_toStartOf="parent"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_my_recipe_button"
             style="@style/ButtonStyle"
@@ -308,7 +320,7 @@
             android:text="@string/save_my_recipe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_new_ingredient_to_recycler" />
+            app:layout_constraintTop_toBottomOf="@id/recipe_process_edit_text" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

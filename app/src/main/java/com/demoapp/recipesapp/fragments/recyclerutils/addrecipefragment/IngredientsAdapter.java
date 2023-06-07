@@ -1,7 +1,6 @@
 package com.demoapp.recipesapp.fragments.recyclerutils.addrecipefragment;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         IngredientsRcViewItemBinding binding = IngredientsRcViewItemBinding
-                .inflate(LayoutInflater.from(parent.getContext()), parent, false)
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false);
 
         return new ViewHolder(binding);
     }
