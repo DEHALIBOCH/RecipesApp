@@ -1,5 +1,6 @@
 package com.demoapp.recipesapp.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -16,4 +17,6 @@ public class Recipe {
     private String recipe;  // Рецептура(процесс приготовления)
     private String authorUID; // Идентификатор автора
     private String firebaseKey; // Ключ в файрбейзе
+    private final ArrayList<String> imagesUri = new ArrayList<>();  // Аррейлист для хранения адресов картинок загруженных в БД.
+
 }
