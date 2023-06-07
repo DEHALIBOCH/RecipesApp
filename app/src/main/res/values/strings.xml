@@ -49,6 +49,7 @@
     <string name="single_string_pick">%1$s</string>
     <string name="add_new_ingredient">Add new ingredient</string>
     <string name="save_my_recipe">Save my recipe</string>
+    <string name="recipe_process">Recipe process</string>
     <string-array name="recipe_category">
         <item>Appetizer</item>
         <item>Cold platter</item>
