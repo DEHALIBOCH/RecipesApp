@@ -24,7 +24,7 @@
     <string name="successful_registration">Successful Registration</string>
     <string name="home">Home</string>
     <string name="bookmarks">Bookmarks</string>
-    <string name="notifications">Notifications</string>
+    <string name="add_recipe">Add recipe</string>
     <string name="profile">Profile</string>
     <string name="add_new_recipe">Add new recipe</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -37,4 +37,30 @@
     <string name="popular_creators">Popular creators</string>
     <string name="trending_recipes_stars">  %1$.1f</string>
     <string name="recipe_author">By %1$s</string>
+    <string name="create_recipe_title">Create recipe</string>
+    <string name="add_photo_to_recipe">Add photo to recipe</string>
+    <string name="recipe_title">Recipe title</string>
+    <string name="serves">Serves</string>
+    <string name="serves_count">%1$02d</string>
+    <string name="arrow_right">Arrow right</string>
+    <string name="cook_time">Cook time</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="recipe_category">Recipe category</string>
+    <string name="single_string_pick">%1$s</string>
+    <string name="add_new_ingredient">Add new ingredient</string>
+    <string name="save_my_recipe">Save my recipe</string>
+    <string-array name="recipe_category">
+        <item>Appetizer</item>
+        <item>Cold platter</item>
+        <item>Hot appetizer</item>
+        <item>Salad</item>
+        <item>Soup</item>
+        <item>Meat</item>
+        <item>Meat dish</item>
+        <item>Poultry dish</item>
+        <item>Fish and seafoods</item>
+        <item>Sauces</item>
+        <item>Desserts</item>
+        <item>Other</item>
+    </string-array>
 </resources>
