@@ -21,40 +21,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <HorizontalScrollView
-            android:id="@+id/image_pick_horizontal_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="8dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_pick_image_view"
+            android:layout_width="384dp"
+            android:layout_height="216dp"
+            android:contentDescription="@string/add_photo_to_recipe"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseline_add_photo_alternate_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_recipe_title_text_view">
+            app:layout_constraintTop_toBottomOf="@id/add_recipe_title_text_view"
+            app:shapeAppearanceOverlay="@style/TrendingNowRecipeItemImageView" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <include
-                    android:id="@+id/load_image_image_view_1"
-                    layout="@layout/load_image_to_recipe_image_view" />
-
-                <include
-                    android:id="@+id/load_image_image_view_2"
-                    layout="@layout/load_image_to_recipe_image_view" />
-
-                <include
-                    android:id="@+id/load_image_image_view_3"
-                    layout="@layout/load_image_to_recipe_image_view" />
-
-                <include
-                    android:id="@+id/load_image_image_view_4"
-                    layout="@layout/load_image_to_recipe_image_view" />
-
-            </LinearLayout>
-        </HorizontalScrollView>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/recipeTitle"
@@ -68,7 +46,7 @@
             app:hintTextColor="@color/secondary_40"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_pick_horizontal_scroll_view">
+            app:layout_constraintTop_toBottomOf="@id/image_pick_image_view">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/recipe_title_edit_text"
@@ -119,9 +97,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/serves_count"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/serves_text"
             app:layout_constraintEnd_toStartOf="@id/arrow_right"
             app:layout_constraintHorizontal_bias="1.0"
@@ -180,9 +158,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/serves_count"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/cook_time_text"
             app:layout_constraintEnd_toStartOf="@id/arrow_right2"
             app:layout_constraintHorizontal_bias="1.0"
@@ -229,8 +207,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@string/recipe_category"
-            android:textSize="20sp"
             android:textColor="@color/black"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/recipe_category_icon"
             app:layout_constraintStart_toEndOf="@id/recipe_category_icon"
@@ -241,9 +219,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/single_string_pick"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/recipe_category_text"
             app:layout_constraintEnd_toStartOf="@id/arrow_right3"
             app:layout_constraintHorizontal_bias="1.0"
@@ -302,13 +280,14 @@
             android:id="@+id/recipe_process_edit_text"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:hint="@string/recipe_process"
-            app:layout_constraintTop_toBottomOf="@id/add_new_ingredient_to_recycler"
             android:layout_marginTop="16dp"
             android:background="@drawable/search_view_background"
-            app:layout_constraintStart_toStartOf="parent"
+            android:hint="@string/recipe_process"
+            android:inputType="text"
             android:padding="8dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_new_ingredient_to_recycler" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_my_recipe_button"

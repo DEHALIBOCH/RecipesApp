@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.demoapp.recipesapp.databinding.IngredientsRcViewItemBinding;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
+    public ArrayList<String> ingredientNames = new ArrayList<>();
+    public ArrayList<Integer> ingredientQuantities = new ArrayList<>();
 
-    public HashMap<String, Integer> ingredients = new HashMap<>();
 
     @NonNull
     @Override
@@ -25,22 +26,59 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // TODO сделать наблюдатель за названием ингредиента и за кол-вом граммов
-        // TODO сделать дизайн для пикера ингредиентов
+        holder.binding.removeIngredientButton.setOnClickListener(view -> {
+            removeIngredient(holder.getAdapterPosition());
+        });
+        try {
+            String name = holder.binding.itemNameEditText.toString();
+            ingredientNames.remove(position);
+            ingredientNames.add(position, name);
+        } catch (Exception ignored) {
+        }
+        try {
+            String quantityStr = holder.binding.quantityEditText.toString();
+            Integer quantity = Integer.parseInt(quantityStr);
+            ingredientQuantities.remove(position);
+            ingredientQuantities.add(position, quantity);
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
     public int getItemCount() {
-        return ingredients.size();
+        return ingredientNames.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         IngredientsRcViewItemBinding binding;
-
 
         public ViewHolder(IngredientsRcViewItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
     }
+
+    /**
+     * Добавляет пустые поля для ингредиентов
+     */
+    public void addEmptyIngredient() {
+        ingredientNames.add("");
+        ingredientQuantities.add(-1);
+        notifyItemInserted(ingredientNames.size() - 1);
+    }
+
+    /**
+     * Удаляет ингредиент из RecyclerView на определенной позиции
+     *
+     * @param position позиция элемента
+     */
+    private void removeIngredient(int position) {
+        ingredientNames.remove(position);
+        ingredientQuantities.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+    }
+
+
+
 }
