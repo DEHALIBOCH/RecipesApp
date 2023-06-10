@@ -23,7 +23,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_pick_image_view"
-            android:layout_width="384dp"
+            android:layout_width="0dp"
             android:layout_height="216dp"
             android:contentDescription="@string/add_photo_to_recipe"
             android:scaleType="centerInside"
@@ -83,7 +83,7 @@
             android:id="@+id/serves_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="12dp"
             android:text="@string/serves"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -92,32 +92,22 @@
             app:layout_constraintStart_toEndOf="@id/serves_icon"
             app:layout_constraintTop_toTopOf="@id/serves_icon" />
 
-        <TextView
-            android:id="@+id/serves_count_text_view"
+        <EditText
+            android:id="@+id/serves_count_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/serves_count"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:hint="@string/serves_hint"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/serves_text"
-            app:layout_constraintEnd_toStartOf="@id/arrow_right"
+            app:layout_constraintEnd_toEndOf="@+id/serves_picker"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/serves_text"
-            app:layout_constraintTop_toTopOf="@id/serves_text"
-            tools:text="01" />
-
-        <ImageView
-            android:id="@+id/arrow_right"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/arrow_right"
-            android:scaleType="centerCrop"
-            android:src="@drawable/arrow_right_red"
-            app:layout_constraintBottom_toBottomOf="@id/serves_count_text_view"
-            app:layout_constraintEnd_toEndOf="@id/serves_picker"
-            app:layout_constraintTop_toTopOf="@id/serves_count_text_view" />
+            app:layout_constraintTop_toTopOf="@id/serves_text" />
 
         <View
             android:id="@+id/cook_time_picker"
@@ -144,7 +134,7 @@
             android:id="@+id/cook_time_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="12dp"
             android:text="@string/cook_time"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -153,32 +143,22 @@
             app:layout_constraintStart_toEndOf="@id/cook_time_icon"
             app:layout_constraintTop_toTopOf="@id/cook_time_icon" />
 
-        <TextView
-            android:id="@+id/cook_time_count_text_view"
+        <EditText
+            android:id="@+id/cook_time_count_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/serves_count"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:hint="@string/cook_time_hint"
+            android:inputType="number"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/cook_time_text"
-            app:layout_constraintEnd_toStartOf="@id/arrow_right2"
+            app:layout_constraintEnd_toEndOf="@+id/cook_time_picker"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/cook_time_text"
-            app:layout_constraintTop_toTopOf="@id/cook_time_text"
-            tools:text="01" />
-
-        <ImageView
-            android:id="@+id/arrow_right2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/arrow_right"
-            android:scaleType="centerCrop"
-            android:src="@drawable/arrow_right_red"
-            app:layout_constraintBottom_toBottomOf="@id/cook_time_count_text_view"
-            app:layout_constraintEnd_toEndOf="@id/cook_time_picker"
-            app:layout_constraintTop_toTopOf="@id/cook_time_count_text_view" />
+            app:layout_constraintTop_toTopOf="@id/cook_time_text" />
 
         <View
             android:id="@+id/recipe_category_picker"
@@ -205,7 +185,7 @@
             android:id="@+id/recipe_category_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="12dp"
             android:text="@string/recipe_category"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -214,32 +194,19 @@
             app:layout_constraintStart_toEndOf="@id/recipe_category_icon"
             app:layout_constraintTop_toTopOf="@id/recipe_category_icon" />
 
-        <TextView
-            android:id="@+id/recipe_category_text_view"
-            android:layout_width="wrap_content"
+        <Spinner
+            android:id="@+id/recipe_category_spinner"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/single_string_pick"
+            android:entries="@array/recipe_category"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:layout_marginStart="4dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/recipe_category_text"
-            app:layout_constraintEnd_toStartOf="@id/arrow_right3"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/recipe_category_text"
-            app:layout_constraintTop_toTopOf="@id/recipe_category_text"
-            tools:text="Meat" />
-
-        <ImageView
-            android:id="@+id/arrow_right3"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/arrow_right"
-            android:scaleType="centerCrop"
-            android:src="@drawable/arrow_right_red"
-            app:layout_constraintBottom_toBottomOf="@id/recipe_category_text_view"
-            app:layout_constraintEnd_toEndOf="@id/recipe_category_picker"
-            app:layout_constraintTop_toTopOf="@id/recipe_category_text_view" />
+            app:layout_constraintTop_toTopOf="@id/recipe_category_text" />
 
         <TextView
             android:id="@+id/ingredientsText"

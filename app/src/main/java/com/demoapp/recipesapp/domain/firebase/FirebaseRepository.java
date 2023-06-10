@@ -8,12 +8,19 @@ public class FirebaseRepository {
     final static String dataBaseUrl = "https://recipesapp-3020b-default-rtdb.europe-west1.firebasedatabase.app/";
     private final FirebaseDatabase DATABASE;
     private final DatabaseReference USERS;
+    private final DatabaseReference RECIPES;
     private static final FirebaseRepository INSTANCE = new FirebaseRepository();
 
     private FirebaseRepository() {
         DATABASE = FirebaseDatabase.getInstance(dataBaseUrl);
         USERS = DATABASE.getReference().child("Users");
+        RECIPES = DATABASE.getReference().child("Recipes");
     }
+
+    public DatabaseReference getRECIPES() {
+        return RECIPES;
+    }
+
 
     /**
      * Метод возвращающий ссылку на ветку Users базы данных.

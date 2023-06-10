@@ -2,23 +2,29 @@ package com.demoapp.recipesapp;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.demoapp.recipesapp.data.User;
 import com.demoapp.recipesapp.databinding.ActivityMainBinding;
+import com.demoapp.recipesapp.domain.firebase.FirebaseUtils;
+import com.demoapp.recipesapp.domain.firebase.UserCallback;
 import com.demoapp.recipesapp.fragments.AddRecipeFragment;
 import com.demoapp.recipesapp.fragments.BookmarksFragment;
 import com.demoapp.recipesapp.fragments.HomeFragment;
 import com.demoapp.recipesapp.fragments.ProfileFragment;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private FragmentManager fragmentManager;
+    public static User currentUser = null;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         // TODO - начать работу над MainActivity
         // TODO - посмотреть как хранить файлы в файрбейз
+        firebaseAuth = FirebaseAuth.getInstance();
         final int CONTAINER_ID = binding.fragmentContainerView.getId();
 
         fragmentManager = getSupportFragmentManager();
@@ -62,5 +69,21 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        String currentUserUid = firebaseAuth.getUid();
+        if (currentUserUid != null) {
+            FirebaseUtils firebaseUtils = new FirebaseUtils();
+            firebaseUtils.getUserByUID(currentUserUid, new UserCallback() {
+                @Override
+                public void userReady(User user) {
+                    currentUser = user;
+                }
+
+                @Override
+                public void unsuccessful() {
+                    Toast.makeText(MainActivity.this, getString(R.string.database_error), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 }

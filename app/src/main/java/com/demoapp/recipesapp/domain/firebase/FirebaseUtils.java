@@ -2,6 +2,7 @@ package com.demoapp.recipesapp.domain.firebase;
 
 import androidx.annotation.NonNull;
 
+import com.demoapp.recipesapp.data.Recipe;
 import com.demoapp.recipesapp.data.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -16,6 +17,7 @@ public class FirebaseUtils {
 
     private final FirebaseRepository firebaseRepository = FirebaseRepository.getInstance();
     private final DatabaseReference users = firebaseRepository.getUSERS();
+    private final DatabaseReference recipes = firebaseRepository.getRECIPES();
 
     /**
      * Данный метод необходимо использовать только при авторизации.
@@ -112,5 +114,26 @@ public class FirebaseUtils {
                     }
                 });
 
+    }
+
+    /**
+     * Метод добавляющий рецепт в базу данных
+     *
+     * @param recipe - сам рецепт
+     * @param firebaseCallback - коллбек для взаимодействия с результатом загрузки.
+     */
+    public void addRecipeToDatabase(Recipe recipe, FirebaseCallback firebaseCallback) {
+        DatabaseReference push = recipes.push();
+        push.setValue(recipe).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                firebaseCallback.successful();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                firebaseCallback.unsuccessful();
+            }
+        });
     }
 }

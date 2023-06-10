@@ -41,6 +41,7 @@ public class WelcomeActivity extends AppCompatActivity {
     private void checkUserAuth() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser != null) {
+            String currentUserUid = firebaseUser.getUid();
             Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);

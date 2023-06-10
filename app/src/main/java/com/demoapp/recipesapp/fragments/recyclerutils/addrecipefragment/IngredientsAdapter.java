@@ -1,5 +1,7 @@
 package com.demoapp.recipesapp.fragments.recyclerutils.addrecipefragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -29,19 +31,42 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         holder.binding.removeIngredientButton.setOnClickListener(view -> {
             removeIngredient(holder.getAdapterPosition());
         });
-        try {
-            String name = holder.binding.itemNameEditText.toString();
-            ingredientNames.remove(position);
-            ingredientNames.add(position, name);
-        } catch (Exception ignored) {
-        }
-        try {
-            String quantityStr = holder.binding.quantityEditText.toString();
-            Integer quantity = Integer.parseInt(quantityStr);
-            ingredientQuantities.remove(position);
-            ingredientQuantities.add(position, quantity);
-        } catch (Exception ignored) {
-        }
+        int pos = position;
+        holder.binding.itemNameEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ingredientNames.remove(pos);
+                ingredientNames.add(pos, s.toString());
+            }
+        });
+
+        holder.binding.quantityEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ingredientQuantities.remove(pos);
+                ingredientQuantities.add(pos, Integer.parseInt(s.toString()));
+            }
+        });
     }
 
     @Override
@@ -78,7 +103,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, getItemCount());
     }
-
 
 
 }

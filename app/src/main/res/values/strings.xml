@@ -22,6 +22,7 @@
     <string name="passwords_dont_match">Passwords don\'t match, please try again.</string>
     <string name="not_valid_email">A valid email is required</string>
     <string name="successful_registration">Successful Registration</string>
+    <string name="invalid_data">Invalid data</string>
     <string name="home">Home</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="add_recipe">Add recipe</string>
@@ -53,6 +54,9 @@
     <string name="item_name">Item name</string>
     <string name="quantity">Quantity</string>
     <string name="remove_ingredient">Remove ingredient</string>
+    <string name="serves_hint">serves count</string>
+    <string name="cook_time_hint">cook time</string>
+    <string name="category_hint">category</string>
     <string-array name="recipe_category">
         <item>Appetizer</item>
         <item>Cold platter</item>

@@ -13,11 +13,13 @@ public class Recipe {
     private String title;   // Заголовок
     private int serves; // Кол-во порций
     private int cookTime;   // Время приготовления
-    private final HashMap<String, Integer> ingredients = new HashMap<>();    // Ингридиенты
+    private HashMap<String, Integer> ingredients;    // Ингридиенты
     private String recipe;  // Рецептура(процесс приготовления)
     private String authorUID; // Идентификатор автора
     private String firebaseKey; // Ключ в файрбейзе
     private final ArrayList<String> imagesUrlArray = new ArrayList<>();  // Аррейлист для хранения адресов картинок загруженных в БД.
+
+    private String imageUrl;    // Url изображения в файрбейзе
     private String category;
 
     public Recipe(String authorUID) {
@@ -95,5 +97,38 @@ public class Recipe {
 
     public String getCategory() {
         return category;
+    }
+
+    public void setAuthorUID(String authorUID) {
+        this.authorUID = authorUID;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public void setIngredients(HashMap<String, Integer> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "uuid=" + uuid +
+                ", title='" + title + '\'' +
+                ", serves=" + serves +
+                ", cookTime=" + cookTime +
+                ", ingredients=" + ingredients.toString() +
+                ", recipe='" + recipe + '\'' +
+                ", authorUID='" + authorUID + '\'' +
+                ", firebaseKey='" + firebaseKey + '\'' +
+                ", imagesUrlArray=" + imagesUrlArray +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", category='" + category + '\'' +
+                '}';
     }
 }
