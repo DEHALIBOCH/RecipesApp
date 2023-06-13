@@ -81,6 +81,11 @@ public class AddRecipeFragment extends Fragment {
         return binding.getRoot();
     }
 
+    /**
+     * После успешной загрузки картинки в firebase, загружает рецепт в базуданных
+     *
+     * @param recipe
+     */
     private void uploadRecipeToFirebase(Recipe recipe) {
         binding.progressBar.setVisibility(View.VISIBLE);
         setEnabledForAllElements(false);
@@ -90,6 +95,7 @@ public class AddRecipeFragment extends Fragment {
                 firebaseUtils.addRecipeToDatabase(recipe);
                 binding.progressBar.setVisibility(View.GONE);
                 setEnabledForAllElements(true);
+                cleanDataFromFragment();
             }
 
             @Override
@@ -99,6 +105,26 @@ public class AddRecipeFragment extends Fragment {
         });
     }
 
+    /**
+     * Очищает поля ввода после успешной загрузки рецепта
+     */
+    public void cleanDataFromFragment() {
+        binding.imagePickImageView.setImageResource(R.drawable.baseline_add_photo_alternate_24);
+        binding.recipeTitleEditText.setText("");
+        binding.servesCountEditText.setText("");
+        binding.cookTimeCountEditText.setText("");
+        binding.recipeCategorySpinner.setSelection(0);
+        initIngredientsRecyclerView(requireContext());
+        binding.recipeProcessEditText.setText("");
+    }
+
+
+    /**
+     * Устанавливает возможность нажатия на элементы, чтобы во время загрузки убрать с элементов
+     * возможность нажатия
+     *
+     * @param isEnabled доступны ли элементы
+     */
     private void setEnabledForAllElements(boolean isEnabled) {
         binding.imagePickImageView.setEnabled(isEnabled);
         binding.recipeTitleEditText.setEnabled(isEnabled);
@@ -149,7 +175,7 @@ public class AddRecipeFragment extends Fragment {
     /**
      * Запускает лаунчер для выбора фотографии с устройства пользователя
      */
-    private ActivityResultLauncher<String> startActivityForContent =
+    private final ActivityResultLauncher<String> startActivityForContent =
             registerForActivityResult(new ActivityResultContracts.GetContent(),
                     new ActivityResultCallback<Uri>() {
                         @Override
@@ -190,7 +216,10 @@ public class AddRecipeFragment extends Fragment {
 //                firebaseCallback.successful();
 //            }
 //        });
-        storageReference = FirebaseStorage.getInstance().getReference("images/" + recipe.getAuthorUID());
+
+        String location = "images/" + recipe.getAuthorUID() + "/" + recipe.getUniqueId();
+
+        storageReference = FirebaseStorage.getInstance().getReference(location);
 
         Uri uri = (Uri) binding.imagePickImageView.getTag();
         Context context = requireContext();
