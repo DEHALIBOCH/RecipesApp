@@ -10,6 +10,8 @@ public class User {
     private String password;
     private String tokenUID; // Уникальный идентификатор
 
+    private String avatarUrl; // Url аватара
+
     private String firebaseKey;
     private String location;
     private String bio;     // Краткое описание профиля, как в инстаграмме
@@ -132,6 +134,16 @@ public class User {
     public void setFirebaseKey(String firebaseKey) {
         this.firebaseKey = firebaseKey;
     }
+
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
 
     @Override
     public String toString() {

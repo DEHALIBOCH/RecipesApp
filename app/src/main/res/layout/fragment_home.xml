@@ -75,38 +75,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trending_recipes_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="296dp"
+            android:layout_height="400dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/see_all_trending_recipes"
             app:layout_constraintStart_toStartOf="@id/trending_now_text_view"
             app:layout_constraintTop_toBottomOf="@id/trending_now_text_view" />
 
-        <TextView
-            android:id="@+id/popular_category_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/popular_category"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/trending_recipes_recycler_view"
-            app:layout_constraintTop_toBottomOf="@id/trending_recipes_recycler_view" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/category_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/popular_category_text_view"
-            app:layout_constraintTop_toBottomOf="@id/popular_category_text_view" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recipe_by_category_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            app:layout_constraintEnd_toEndOf="@id/category_recycler_view"
-            app:layout_constraintStart_toStartOf="@id/category_recycler_view"
-            app:layout_constraintTop_toBottomOf="@id/category_recycler_view" />
 
         <TextView
             android:id="@+id/popular_creators_text_view"
@@ -116,8 +90,8 @@
             android:text="@string/popular_creators"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/recipe_by_category_recycler_view"
-            app:layout_constraintTop_toBottomOf="@id/recipe_by_category_recycler_view" />
+            app:layout_constraintStart_toStartOf="@id/trending_recipes_recycler_view"
+            app:layout_constraintTop_toBottomOf="@id/trending_recipes_recycler_view" />
 
         <TextView
             android:id="@+id/see_all_popular_creators"
@@ -136,7 +110,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popular_creators_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/popular_creators_text_view"

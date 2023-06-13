@@ -61,6 +61,15 @@
     <string name="category_hint">category</string>
     <string name="img_upload_success">Successfully uploaded image</string>
     <string name="img_upload_failure">Failure with uploading image</string>
+    <string name="my_profile">My profile</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="user">User User</string>
+    <string name="bio_sample">Hello I`m User User, I`m from Kazakhstan 🇰🇿 I love cooking so much!</string>
+    <string name="recipes">Recipes:</string>
+    <string name="type_name">Type your name</string>
+    <string name="type_lastname">Type your lastname</string>
+    <string name="type_age">Type your age</string>
+    <string name="commit">Commit</string>
     <string-array name="recipe_category">
         <item>Appetizer</item>
         <item>Cold platter</item>
