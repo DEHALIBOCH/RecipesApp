@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/recipe_title_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:foreground="@drawable/image_foreground"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/TrendingNowRecipeItemImageView"
+        tools:src="@drawable/welcome_activity_background" />
+
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/recipe_bookmark_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/checkbox_bookmark_background"
+        android:button="@drawable/radio_button_bookmark"
+        app:layout_constraintEnd_toEndOf="@+id/recipe_title_image_view"
+        app:layout_constraintTop_toTopOf="@+id/recipe_title_image_view" />
+
+    <TextView
+        android:id="@+id/recipe_title_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/recipe_title_image_view"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/recipe_title_image_view"
+        app:layout_constraintTop_toTopOf="@id/recipe_title_image_view"
+        tools:text="Recipe title" />
+
+    <TextView
+        android:id="@+id/recipe_overview_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:lines="2"
+        android:text="@string/recipe_overview"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/recipe_title_text_view"
+        app:layout_constraintStart_toStartOf="@id/recipe_title_text_view"
+        app:layout_constraintTop_toBottomOf="@id/recipe_title_text_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
