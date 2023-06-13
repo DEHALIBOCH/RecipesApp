@@ -95,29 +95,16 @@ public class AddRecipeFragment extends Fragment {
                 firebaseUtils.addRecipeToDatabase(recipe);
                 binding.progressBar.setVisibility(View.GONE);
                 setEnabledForAllElements(true);
-                cleanDataFromFragment();
             }
 
             @Override
             public void unsuccessful() {
+                binding.progressBar.setVisibility(View.GONE);
+                setEnabledForAllElements(true);
                 Toast.makeText(requireContext(), getString(R.string.database_error), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    /**
-     * Очищает поля ввода после успешной загрузки рецепта
-     */
-    public void cleanDataFromFragment() {
-        binding.imagePickImageView.setImageResource(R.drawable.baseline_add_photo_alternate_24);
-        binding.recipeTitleEditText.setText("");
-        binding.servesCountEditText.setText("");
-        binding.cookTimeCountEditText.setText("");
-        binding.recipeCategorySpinner.setSelection(0);
-        initIngredientsRecyclerView(requireContext());
-        binding.recipeProcessEditText.setText("");
-    }
-
 
     /**
      * Устанавливает возможность нажатия на элементы, чтобы во время загрузки убрать с элементов
@@ -225,7 +212,8 @@ public class AddRecipeFragment extends Fragment {
         Context context = requireContext();
 
         if (uri == null) {
-            firebaseCallback.successful();
+            Toast.makeText(context, context.getString(R.string.add_photo_to_recipe), Toast.LENGTH_SHORT).show();
+            firebaseCallback.unsuccessful();
             return;
         }
 
