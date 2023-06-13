@@ -198,10 +198,10 @@
             android:id="@+id/recipe_category_spinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:entries="@array/recipe_category"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:layout_marginStart="4dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/recipe_category_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -267,6 +267,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recipe_process_edit_text" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/primary_80"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

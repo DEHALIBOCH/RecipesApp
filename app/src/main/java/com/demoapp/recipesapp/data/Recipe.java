@@ -2,14 +2,11 @@ package com.demoapp.recipesapp.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 /**
  * Класс предназначенный для хранения основной информации о рецепте: автор, состав, рецепт, фото и т.д.
  */
 public class Recipe {
-
-    private final UUID uuid = UUID.randomUUID();    // Уникальный идентификатор рецепта
     private String title;   // Заголовок
     private int serves; // Кол-во порций
     private int cookTime;   // Время приготовления
@@ -57,10 +54,6 @@ public class Recipe {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public UUID getUuid() {
-        return uuid;
     }
 
     public String getTitle() {
@@ -118,7 +111,6 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe{" +
-                "uuid=" + uuid +
                 ", title='" + title + '\'' +
                 ", serves=" + serves +
                 ", cookTime=" + cookTime +

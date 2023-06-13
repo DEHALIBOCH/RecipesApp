@@ -23,7 +23,9 @@
     <string name="not_valid_email">A valid email is required</string>
     <string name="successful_registration">Successful Registration</string>
     <string name="invalid_data">Invalid data</string>
+    <string name="no_permissions">Without permissions application will not work properly</string>
     <string name="home">Home</string>
+    <string name="image_upload">Uploading image</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="add_recipe">Add recipe</string>
     <string name="profile">Profile</string>
@@ -57,6 +59,8 @@
     <string name="serves_hint">serves count</string>
     <string name="cook_time_hint">cook time</string>
     <string name="category_hint">category</string>
+    <string name="img_upload_success">Successfully uploaded image</string>
+    <string name="img_upload_failure">Failure with uploading image</string>
     <string-array name="recipe_category">
         <item>Appetizer</item>
         <item>Cold platter</item>

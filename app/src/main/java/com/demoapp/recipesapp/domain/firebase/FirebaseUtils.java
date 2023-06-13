@@ -120,20 +120,9 @@ public class FirebaseUtils {
      * Метод добавляющий рецепт в базу данных
      *
      * @param recipe - сам рецепт
-     * @param firebaseCallback - коллбек для взаимодействия с результатом загрузки.
      */
-    public void addRecipeToDatabase(Recipe recipe, FirebaseCallback firebaseCallback) {
+    public void addRecipeToDatabase(Recipe recipe) {
         DatabaseReference push = recipes.push();
-        push.setValue(recipe).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                firebaseCallback.successful();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                firebaseCallback.unsuccessful();
-            }
-        });
+        push.setValue(recipe);
     }
 }
