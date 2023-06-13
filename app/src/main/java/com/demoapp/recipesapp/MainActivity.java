@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.demoapp.recipesapp.data.User;
 import com.demoapp.recipesapp.databinding.ActivityMainBinding;
@@ -25,14 +26,16 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     public static User currentUser = null;
     private FirebaseAuth firebaseAuth;
+    public RecipeViewModel recipeViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // TODO - начать работу над MainActivity
-        // TODO - посмотреть как хранить файлы в файрбейз
+
+        recipeViewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
+
         firebaseAuth = FirebaseAuth.getInstance();
         final int CONTAINER_ID = binding.fragmentContainerView.getId();
 
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void userReady(User user) {
                     currentUser = user;
+                    recipeViewModel.currentUser = user;
                 }
 
                 @Override
