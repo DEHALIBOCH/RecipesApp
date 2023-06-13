@@ -13,6 +13,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class FirebaseUtils {
 
     private final FirebaseRepository firebaseRepository = FirebaseRepository.getInstance();
@@ -125,4 +127,30 @@ public class FirebaseUtils {
         DatabaseReference push = recipes.push();
         push.setValue(recipe);
     }
+
+    /**
+     * Возвращает список рецептов(20шт) из базы данных
+     *
+     * @param recipesCallback Коллбек возвращаюший лист рецептов
+     */
+    public void getAllRecipes(int start, RecipesCallback recipesCallback) {
+        Query query = recipes.orderByKey().startAfter(start).limitToFirst(20);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Recipe> recipes = new ArrayList<Recipe>(20);
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Recipe recipe = ds.getValue(Recipe.class);
+                    recipes.add(recipe);
+                }
+                recipesCallback.successful(recipes);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                recipesCallback.unsuccessful(error);
+            }
+        });
+    }
+
 }
