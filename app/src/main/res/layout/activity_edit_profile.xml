@@ -105,12 +105,15 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/location_edit_text"
+            android:id="@+id/bio_edit_text"
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/type_location"
-            android:inputType="text" />
+            android:hint="@string/type_bio"
+            android:lines="3"
+            android:minLines="3"
+            android:maxLines="5"
+            android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton

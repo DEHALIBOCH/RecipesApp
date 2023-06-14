@@ -20,7 +20,7 @@ public class RecipeViewModel extends ViewModel {
 
     private final FirebaseUtils firebaseUtils = new FirebaseUtils();
     public MutableLiveData<ArrayList<Recipe>> recipesList = new MutableLiveData<>();
-    public User currentUser = null;
+    public User user;
     public int start = 0;
 
     public RecipeViewModel() {
@@ -28,7 +28,7 @@ public class RecipeViewModel extends ViewModel {
     }
 
     public void getRecipes() {
-        firebaseUtils.getAllRecipes(start, new RecipesCallback() {
+        firebaseUtils.getAllRecipes(new RecipesCallback() {
             @Override
             public void successful(ArrayList<Recipe> list) {
                 recipesList.setValue(list);

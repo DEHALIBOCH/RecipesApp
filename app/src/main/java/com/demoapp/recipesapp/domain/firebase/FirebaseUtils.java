@@ -103,7 +103,7 @@ public class FirebaseUtils {
      * @param firebaseCallback
      */
     public void updateUser(User currentUser, FirebaseCallback firebaseCallback) {
-        users.child("tokenUID").setValue(currentUser)
+        users.child(currentUser.getFirebaseKey()).setValue(currentUser)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -125,6 +125,8 @@ public class FirebaseUtils {
      */
     public void addRecipeToDatabase(Recipe recipe) {
         DatabaseReference push = recipes.push();
+        String firebaseKey = push.getKey();
+        recipe.setFirebaseKey(firebaseKey);
         push.setValue(recipe);
     }
 
@@ -133,12 +135,12 @@ public class FirebaseUtils {
      *
      * @param recipesCallback Коллбек возвращаюший лист рецептов
      */
-    public void getAllRecipes(int start, RecipesCallback recipesCallback) {
-        Query query = recipes.orderByKey().startAfter(start).limitToFirst(20);
+    public void getAllRecipes(RecipesCallback recipesCallback) {
+        Query query = recipes.orderByKey();
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<Recipe> recipes = new ArrayList<Recipe>(20);
+                ArrayList<Recipe> recipes = new ArrayList<Recipe>();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Recipe recipe = ds.getValue(Recipe.class);
                     recipes.add(recipe);
@@ -153,4 +155,29 @@ public class FirebaseUtils {
         });
     }
 
+    /**
+     * Возвращает рецепты размещенные пользователем
+     *
+     * @param userUid Идентификатор автора
+     * @param recipesCallback Коллбек для обработки ответа
+     */
+    public void getUserRecipes(String userUid, RecipesCallback recipesCallback) {
+        Query query = recipes.orderByChild("authorUID").equalTo(userUid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Recipe recipe = ds.getValue(Recipe.class);
+                    recipes.add(recipe);
+                }
+                recipesCallback.successful(recipes);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                recipesCallback.unsuccessful(error);
+            }
+        });
+    }
 }

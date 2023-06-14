@@ -22,6 +22,7 @@
     <string name="passwords_dont_match">Passwords don\'t match, please try again.</string>
     <string name="not_valid_email">A valid email is required</string>
     <string name="successful_registration">Successful Registration</string>
+    <string name="successful_update">Data was successfully updated</string>
     <string name="invalid_data">Invalid data</string>
     <string name="no_permissions">Without permissions application will not work properly</string>
     <string name="home">Home</string>
@@ -72,8 +73,11 @@
     <string name="commit">Commit</string>
     <string name="recipe_overview">%1$d Ingredients | %2$$d min | %3$s</string>
     <string name="please_add_photo">Please add photo to recipe</string>
-    <string name="type_location">Type your loaction</string>
+    <string name="type_bio">Type information about you</string>
     <string name="logout">Logout</string>
+    <string name="are_sure_to_logout">Are you sure you want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string-array name="recipe_category">
         <item>Appetizer</item>
         <item>Cold platter</item>

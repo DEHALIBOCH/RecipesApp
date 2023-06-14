@@ -1,8 +1,9 @@
 package com.demoapp.recipesapp.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
     private String name;
     private String lastname;
     private int age = 0;

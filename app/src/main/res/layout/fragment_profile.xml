@@ -103,8 +103,8 @@
         android:background="@drawable/button_welcome_activity"
         android:text="@string/logout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:layout_width="match_parent"
@@ -114,5 +114,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bio_text_view" />
+
+    <include
+        android:id="@+id/loading_progress_bar"
+        layout="@layout/progress_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

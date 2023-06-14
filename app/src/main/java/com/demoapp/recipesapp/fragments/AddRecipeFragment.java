@@ -274,10 +274,10 @@ public class AddRecipeFragment extends Fragment {
         if (!checkInputs()) {
             return null;
         }
-        if (MainActivity.currentUser == null) {
+        if (MainActivity.currUser == null) {
             return null;
         }
-        User user = MainActivity.currentUser;
+        User user = MainActivity.currUser;
         Recipe recipe = new Recipe(user.getTokenUID());
         String title = binding.recipeTitleEditText.getText().toString();
         int servesCount = Integer.parseInt(binding.servesCountEditText.getText().toString());

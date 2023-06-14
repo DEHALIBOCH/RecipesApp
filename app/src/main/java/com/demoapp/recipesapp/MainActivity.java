@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private FragmentManager fragmentManager;
-    public static User currentUser = null;
+    public static User currUser;
     private FirebaseAuth firebaseAuth;
     public RecipeViewModel recipeViewModel;
 
@@ -79,8 +79,9 @@ public class MainActivity extends AppCompatActivity {
             firebaseUtils.getUserByUID(currentUserUid, new UserCallback() {
                 @Override
                 public void userReady(User user) {
-                    currentUser = user;
-                    recipeViewModel.currentUser = user;
+                    currUser = user;
+                    Constants.USER = user;
+                    recipeViewModel.user = user;
                 }
 
                 @Override

@@ -52,7 +52,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                 .load(currRecipe.getImageUrl())
                 .placeholder(R.drawable.loading_placeholder)
                 .error(R.drawable.loading_error)
-                .centerCrop()
                 .into(holder.binding.recipeTitleImageView);
 
         holder.binding.recipeTitleTextView.setText(currRecipe.getTitle());

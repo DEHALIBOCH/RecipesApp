@@ -1,11 +1,13 @@
 package com.demoapp.recipesapp;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -15,7 +17,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.demoapp.recipesapp.data.User;
 import com.demoapp.recipesapp.databinding.ActivityEditProfileBinding;
@@ -31,11 +32,9 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private ActivityEditProfileBinding binding;
 
-    private RecipeViewModel viewModel;
     private User currUser;
     private StorageReference storageReference;
     private FirebaseUtils firebaseUtils;
-    private boolean isAvatarSelected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +44,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         firebaseUtils = new FirebaseUtils();
 
-        viewModel = new ViewModelProvider(this).get(RecipeViewModel.class);
-        currUser = viewModel.currentUser;
+        currUser = (User) getIntent().getSerializableExtra("currUser");
 
         setUsersData(currUser);
 
@@ -58,16 +56,16 @@ public class EditProfileActivity extends AppCompatActivity {
             if (checkUserInputs()) {
                 String name = binding.nameEditText.getText().toString();
                 String lastname = binding.lastnameEditText.getText().toString();
-                String location = binding.locationEditText.getText().toString();
-                int age = age = Integer.parseInt(binding.nameEditText.getText().toString());
+                String bio = binding.bioEditText.getText().toString();
+                int age = Integer.parseInt(binding.ageEditText.getText().toString());
 
                 currUser.setName(name);
                 currUser.setLastname(lastname);
-                currUser.setLocation(location);
+                currUser.setBio(bio);
                 currUser.setAge(age);
 
-
                 updateUser(currUser);
+                Constants.USER = currUser;
             }
         });
     }
@@ -80,35 +78,38 @@ public class EditProfileActivity extends AppCompatActivity {
     private void updateUser(User currUser) {
         binding.progressBar.setVisibility(View.VISIBLE);
         setEnabledForAllElements(false);
-        if (isAvatarSelected) {
-            uploadImage(currUser, new FirebaseCallback() {
-                @Override
-                public void successful() {
-                    firebaseUtils.updateUser(currUser, new FirebaseCallback() {
-                        @Override
-                        public void successful() {
-                            binding.progressBar.setVisibility(View.GONE);
-                            setEnabledForAllElements(true);
+        uploadImage(currUser, new FirebaseCallback() {
+            @Override
+            public void successful() {
+                firebaseUtils.updateUser(currUser, new FirebaseCallback() {
+                    @Override
+                    public void successful() {
+                        binding.progressBar.setVisibility(View.GONE);
+                        setEnabledForAllElements(true);
+                        Toast.makeText(EditProfileActivity.this, getString(R.string.successful_update), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        setResult(RESULT_OK, intent);
+                        intent.putExtra("user", currUser);
+                        finish();
+                    }
 
-                        }
+                    @Override
+                    public void unsuccessful() {
+                        binding.progressBar.setVisibility(View.GONE);
+                        setEnabledForAllElements(true);
+                        Toast.makeText(EditProfileActivity.this, getString(R.string.database_error), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
-                        @Override
-                        public void unsuccessful() {
-                            binding.progressBar.setVisibility(View.GONE);
-                            setEnabledForAllElements(true);
-                            Toast.makeText(EditProfileActivity.this, getString(R.string.database_error), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+            @Override
+            public void unsuccessful() {
+                binding.progressBar.setVisibility(View.GONE);
+                setEnabledForAllElements(true);
+                Toast.makeText(EditProfileActivity.this, getString(R.string.img_upload_failure), Toast.LENGTH_SHORT).show();
+            }
+        });
 
-                @Override
-                public void unsuccessful() {
-                    binding.progressBar.setVisibility(View.GONE);
-                    setEnabledForAllElements(true);
-                    Toast.makeText(EditProfileActivity.this, getString(R.string.img_upload_failure), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
     }
 
     private void setEnabledForAllElements(boolean isEnabled) {
@@ -116,7 +117,7 @@ public class EditProfileActivity extends AppCompatActivity {
         binding.nameEditText.setEnabled(isEnabled);
         binding.lastnameEditText.setEnabled(isEnabled);
         binding.ageEditText.setEnabled(isEnabled);
-        binding.locationEditText.setEnabled(isEnabled);
+        binding.bioEditText.setEnabled(isEnabled);
         binding.commitButton.setEnabled(isEnabled);
     }
 
@@ -124,15 +125,17 @@ public class EditProfileActivity extends AppCompatActivity {
      * Устанавливает существующие данные о пользователе в базе данных
      */
     private void setUsersData(User currUser) {
-        binding.ageEditText.setText(currUser.getAge());
+
+        binding.ageEditText.setText(String.valueOf(currUser.getAge()));
+
         if (currUser.getName() != null) {
             binding.nameEditText.setText(currUser.getName());
         }
         if (currUser.getLastname() != null) {
             binding.lastnameEditText.setText(currUser.getLastname());
         }
-        if (currUser.getLocation() != null) {
-            binding.locationEditText.setText(currUser.getLocation());
+        if (currUser.getBio() != null) {
+            binding.bioEditText.setText(currUser.getBio());
         }
     }
 
@@ -146,7 +149,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         String name = binding.nameEditText.getText().toString();
         String lastname = binding.lastnameEditText.getText().toString();
-        String location = binding.locationEditText.getText().toString();
+        String bio = binding.bioEditText.getText().toString();
+        String age = binding.ageEditText.getText().toString();
 
         if (name.isEmpty() || name.isBlank()) {
             binding.nameEditText.setError(getString(R.string.invalid_data));
@@ -156,16 +160,21 @@ public class EditProfileActivity extends AppCompatActivity {
             binding.lastnameEditText.setError(getString(R.string.invalid_data));
             flag = false;
         }
-        if (location.isEmpty() || location.isBlank()) {
-            binding.locationEditText.setError(getString(R.string.invalid_data));
+        if (bio.isEmpty() || bio.isBlank()) {
+            binding.bioEditText.setError(getString(R.string.invalid_data));
             flag = false;
         }
 
-        int age = 0;
-        try {
-            age = Integer.parseInt(binding.nameEditText.getText().toString());
-        } catch (Exception e) {
+        if (age.isEmpty() || age.isBlank()) {
+            binding.ageEditText.setError(getString(R.string.invalid_data));
             flag = false;
+        }
+
+        int userAge = 0;
+        try {
+            userAge = Integer.parseInt(age);
+        } catch (Exception e) {
+            Log.d("AGE", age + "", e);
         }
 
         return flag;
@@ -226,7 +235,6 @@ public class EditProfileActivity extends AppCompatActivity {
                                 );
                                 binding.avatarImageView.setImageBitmap(bitmap);
                                 binding.avatarImageView.setTag(result);
-                                isAvatarSelected = true;
                             } catch (Exception e) {
                                 Toast.makeText(EditProfileActivity.this, "Error with image", Toast.LENGTH_SHORT).show();
                             }
