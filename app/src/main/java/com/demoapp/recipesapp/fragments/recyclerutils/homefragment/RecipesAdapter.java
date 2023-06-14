@@ -1,6 +1,7 @@
 package com.demoapp.recipesapp.fragments.recyclerutils.homefragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.demoapp.recipesapp.R;
+import com.demoapp.recipesapp.RecipeDetailActivity;
 import com.demoapp.recipesapp.data.Recipe;
 import com.demoapp.recipesapp.databinding.RecipesRcItemBinding;
 import com.squareup.picasso.Picasso;
@@ -62,7 +64,9 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         });
         // TODO RecipeDetailsActivity
         holder.binding.getRoot().setOnClickListener(view -> {
-
+            Intent intent = new Intent(context, RecipeDetailActivity.class);
+            intent.putExtra("recipe", currRecipe);
+            context.startActivity(intent);
         });
     }
 

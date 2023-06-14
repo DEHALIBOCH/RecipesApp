@@ -41,6 +41,7 @@
     <string name="popular_creators">Popular creators</string>
     <string name="trending_recipes_stars">  %1$.1f</string>
     <string name="recipe_author">By %1$s</string>
+    <string name="author">Author: </string>
     <string name="create_recipe_title">Create recipe</string>
     <string name="add_photo_to_recipe">Add photo to recipe</string>
     <string name="recipe_title">Recipe title</string>
@@ -78,6 +79,8 @@
     <string name="are_sure_to_logout">Are you sure you want to log out?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="items_count">%1$d Items</string>
+    <string name="ingredient_count">%1$dg</string>
     <string-array name="recipe_category">
         <item>Appetizer</item>
         <item>Cold platter</item>

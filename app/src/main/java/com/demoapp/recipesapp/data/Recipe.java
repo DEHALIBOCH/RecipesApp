@@ -2,6 +2,7 @@ package com.demoapp.recipesapp.data;
 
 import com.demoapp.recipesapp.fragments.recyclerutils.homefragment.RecipesAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -9,7 +10,7 @@ import java.util.UUID;
 /**
  * Класс предназначенный для хранения основной информации о рецепте: автор, состав, рецепт, фото и т.д.
  */
-public class Recipe {
+public class Recipe implements Serializable {
 
     private final String uniqueId = UUID.randomUUID().toString();
     private String title;   // Заголовок

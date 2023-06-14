@@ -36,6 +36,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 
 public class AddRecipeFragment extends Fragment {
@@ -287,7 +288,7 @@ public class AddRecipeFragment extends Fragment {
         int servesCount = Integer.parseInt(binding.servesCountEditText.getText().toString());
         int cookTime = Integer.parseInt(binding.cookTimeCountEditText.getText().toString());
         String recipeProcess = binding.recipeProcessEditText.getText().toString();
-        HashMap<String, Integer> ingredients = getIngredientsHashMap();
+        LinkedHashMap<String, Integer> ingredients = getIngredientsHashMap();
         String category = binding.recipeCategorySpinner.getSelectedItem().toString();
         recipe.setTitle(title);
         recipe.setCategory(category);
@@ -304,8 +305,8 @@ public class AddRecipeFragment extends Fragment {
      *
      * @return Map где key - название ингредиента, value - кол-во.
      */
-    private HashMap<String, Integer> getIngredientsHashMap() {
-        HashMap<String, Integer> ingredients = new HashMap<>();
+    private LinkedHashMap<String, Integer> getIngredientsHashMap() {
+        LinkedHashMap<String, Integer> ingredients = new LinkedHashMap<>();
         ArrayList<String> names = ingredientsAdapter.ingredientNames;
         ArrayList<Integer> quantity = ingredientsAdapter.ingredientQuantities;
         for (int i = 0; i < names.size(); i++) {
