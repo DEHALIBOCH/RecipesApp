@@ -103,6 +103,7 @@ public class FirebaseUtils {
      * @param firebaseCallback
      */
     public void updateUser(User currentUser, FirebaseCallback firebaseCallback) {
+
         users.child(currentUser.getFirebaseKey()).setValue(currentUser)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
