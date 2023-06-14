@@ -17,6 +17,7 @@ import com.demoapp.recipesapp.fragments.AddRecipeFragment;
 import com.demoapp.recipesapp.fragments.BookmarksFragment;
 import com.demoapp.recipesapp.fragments.HomeFragment;
 import com.demoapp.recipesapp.fragments.ProfileFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public static User currUser;
     private FirebaseAuth firebaseAuth;
     public RecipeViewModel recipeViewModel;
+    public BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         final int CONTAINER_ID = binding.fragmentContainerView.getId();
+
+        bottomNavigationView = binding.bottomNavBar;
 
         fragmentManager = getSupportFragmentManager();
 

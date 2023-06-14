@@ -46,6 +46,10 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
             @Override
             public void afterTextChanged(Editable s) {
                 ingredientNames.remove(pos);
+                String title = "ingredient";
+                if (s.toString().isEmpty()) {
+                    ingredientNames.add(pos, title);
+                }
                 ingredientNames.add(pos, s.toString());
             }
         });
@@ -64,7 +68,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
             @Override
             public void afterTextChanged(Editable s) {
                 ingredientQuantities.remove(pos);
-                ingredientQuantities.add(pos, Integer.parseInt(s.toString()));
+                int count = 0;
+                try {
+                    count = Integer.parseInt(s.toString());
+                } catch (Exception e) {
+                }
+                ingredientQuantities.add(pos, count);
             }
         });
     }
@@ -87,7 +96,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
      * Добавляет пустые поля для ингредиентов
      */
     public void addEmptyIngredient() {
-        ingredientNames.add("");
+        ingredientNames.add("ingredient");
         ingredientQuantities.add(-1);
         notifyItemInserted(ingredientNames.size() - 1);
     }

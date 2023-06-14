@@ -26,6 +26,7 @@ import com.demoapp.recipesapp.fragments.recyclerutils.homefragment.RecipesAdapte
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class HomeFragment extends Fragment {
 
@@ -43,7 +44,17 @@ public class HomeFragment extends Fragment {
         return binding.getRoot();
     }
 
+    private void showProgressBar() {
+        binding.loadingProgressBar.getRoot().setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        binding.loadingProgressBar.getRoot().setVisibility(View.GONE);
+    }
+
+
     private void initUser() {
+        showProgressBar();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         String currentUserUid = firebaseAuth.getUid();
         if (currentUserUid != null) {
@@ -53,6 +64,7 @@ public class HomeFragment extends Fragment {
                 public void userReady(User user) {
                     Constants.USER = user;
                     viewModel.user = user;
+                    hideProgressBar();
                 }
 
                 @Override
@@ -94,6 +106,7 @@ public class HomeFragment extends Fragment {
      * @param list Список рецептор
      */
     private void recipesReady(ArrayList<Recipe> list) {
+        Collections.shuffle(list);
         adapter.setRecipesList(list);
     }
 }

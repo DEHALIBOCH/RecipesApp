@@ -87,6 +87,9 @@ public class AddRecipeFragment extends Fragment {
      * @param recipe
      */
     private void uploadRecipeToFirebase(Recipe recipe) {
+        if (recipe == null) {
+            return;
+        }
         binding.progressBar.setVisibility(View.VISIBLE);
         setEnabledForAllElements(false);
         uploadImage(recipe, new FirebaseCallback() {
@@ -277,6 +280,7 @@ public class AddRecipeFragment extends Fragment {
         if (MainActivity.currUser == null) {
             return null;
         }
+
         User user = MainActivity.currUser;
         Recipe recipe = new Recipe(user.getTokenUID());
         String title = binding.recipeTitleEditText.getText().toString();
@@ -307,6 +311,9 @@ public class AddRecipeFragment extends Fragment {
         for (int i = 0; i < names.size(); i++) {
             ingredients.put(names.get(i), quantity.get(i));
         }
+        if (ingredients.isEmpty()) {
+            ingredients.put("ingredient", 67);
+        }
         return ingredients;
     }
 
@@ -314,8 +321,6 @@ public class AddRecipeFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         binding.ingredientsRecyclerView.setLayoutManager(linearLayoutManager);
         ingredientsAdapter = new IngredientsAdapter();
-        ingredientsAdapter.addEmptyIngredient();
-        ingredientsAdapter.addEmptyIngredient();
         binding.ingredientsRecyclerView.setAdapter(ingredientsAdapter);
     }
 

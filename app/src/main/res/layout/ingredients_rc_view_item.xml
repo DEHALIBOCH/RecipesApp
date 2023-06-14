@@ -25,6 +25,7 @@
         android:layout_height="48dp"
         android:hint="@string/quantity"
         android:textSize="16sp"
+        android:text="0"
         android:ems="5"
         android:inputType="number"
         android:paddingStart="8dp"

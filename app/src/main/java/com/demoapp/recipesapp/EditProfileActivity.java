@@ -28,8 +28,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.HashMap;
-
 public class EditProfileActivity extends AppCompatActivity {
 
     private ActivityEditProfileBinding binding;

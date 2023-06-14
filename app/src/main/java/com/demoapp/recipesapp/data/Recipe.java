@@ -1,5 +1,7 @@
 package com.demoapp.recipesapp.data;
 
+import com.demoapp.recipesapp.fragments.recyclerutils.homefragment.RecipesAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
@@ -25,6 +27,7 @@ public class Recipe {
     public Recipe(String authorUID) {
         this.authorUID = authorUID;
     }
+    public Recipe() {}
 
     /**
      * Добавление адреса картинки рецепта в базе данных
