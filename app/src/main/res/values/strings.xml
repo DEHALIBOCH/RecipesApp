@@ -1,14 +1,13 @@
 <resources>
-    <string name="app_name">Easy Meal</string>
-    <string name="welcome_activity_background_description">Welcome Activity background image.</string>
-    <string name="welcome_activity_title_text">Let’s\nCooking</string>
+    <string name="app_name" translatable="false">Easy Meal</string>
+    <string name="welcome_activity_background_description" translatable="false">Welcome Activity background image.</string>
     <string name="welcome_activity_main_text">Find best recipes for cooking</string>
     <string name="start_cooking">Start cooking</string>
     <string name="not_yet_registered">Not Registered Yet, Sign Up!</string>
     <string name="sign_in">Sign In</string>
     <string name="type_passwd">Type Your Password</string>
     <string name="type_email">Type your Email</string>
-    <string name="auth_activity_title">Welcome,\nSign In to continue</string>
+    <string name="auth_activity_title">Welcome, Sign In to continue</string>
     <string name="sign_in_google">Sign In with Google</string>
     <string name="auth_error">Authentication error, please try again later.</string>
     <string name="auth_fail">Authentication fail, please check entered information or try again later.</string>
@@ -16,7 +15,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="already_registered">Already Registered, Sign In!</string>
     <string name="retype_password">Retype Your Password</string>
-    <string name="register_activity_title">Welcome,\nSign Up to continue</string>
+    <string name="register_activity_title">Welcome, Sign Up to continue</string>
     <string name="empty_input_field">Field is empty</string>
     <string name="not_valid_password">Password must be at least 6 characters</string>
     <string name="passwords_dont_match">Passwords don\'t match, please try again.</string>
@@ -31,33 +30,30 @@
     <string name="add_recipe">Add recipe</string>
     <string name="profile">Profile</string>
     <string name="add_new_recipe">Add new recipe</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_fragment_title">Find best recipes \nfor cooking</string>
-    <string name="home_fragment_search_hint">Search recipes</string>
-    <string name="voice_search_content_desc">Search recipes with voice</string>
     <string name="trending_now">Trending now 🔥</string>
     <string name="see_all">See all</string>
-    <string name="popular_category">Popular category</string>
+    <string name="popular_category" translatable="false">Popular category</string>
     <string name="popular_creators">Popular creators</string>
-    <string name="trending_recipes_stars">  %1$.1f</string>
+    <string name="trending_recipes_stars" translatable="false">  %1$.1f</string>
     <string name="recipe_author">By %1$s</string>
     <string name="author">Author: </string>
     <string name="create_recipe_title">Create recipe</string>
     <string name="add_photo_to_recipe">Add photo to recipe</string>
     <string name="recipe_title">Recipe title</string>
     <string name="serves">Serves</string>
-    <string name="serves_count">%1$02d</string>
-    <string name="arrow_right">Arrow right</string>
+    <string name="serves_count" translatable="false">%1$02d</string>
+    <string name="arrow_right" translatable="false">Arrow right</string>
     <string name="cook_time">Cook time</string>
     <string name="ingredients">Ingredients</string>
     <string name="recipe_category">Recipe category</string>
-    <string name="single_string_pick">%1$s</string>
+    <string name="single_string_pick" translatable="false">%1$s</string>
     <string name="add_new_ingredient">Add new ingredient</string>
     <string name="save_my_recipe">Save my recipe</string>
     <string name="recipe_process">Recipe process</string>
     <string name="item_name">Item name</string>
     <string name="quantity">Quantity</string>
-    <string name="remove_ingredient">Remove ingredient</string>
+    <string name="remove_ingredient" translatable="false">Remove ingredient</string>
     <string name="serves_hint">serves count</string>
     <string name="cook_time_hint">cook time</string>
     <string name="category_hint">category</string>
