@@ -14,7 +14,7 @@ import com.demoapp.recipesapp.databinding.ActivityMainBinding;
 import com.demoapp.recipesapp.domain.firebase.FirebaseUtils;
 import com.demoapp.recipesapp.domain.firebase.UserCallback;
 import com.demoapp.recipesapp.fragments.AddRecipeFragment;
-import com.demoapp.recipesapp.fragments.BookmarksFragment;
+import com.demoapp.recipesapp.fragments.AllRecipesFragment;
 import com.demoapp.recipesapp.fragments.HomeFragment;
 import com.demoapp.recipesapp.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         final HomeFragment homeFragment = new HomeFragment();
-        final BookmarksFragment bookmarksFragment = new BookmarksFragment();
+        final AllRecipesFragment allRecipesFragment = new AllRecipesFragment();
         final AddRecipeFragment addRecipeFragment = new AddRecipeFragment();
         final ProfileFragment profileFragment = new ProfileFragment();
 
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                             .replace(CONTAINER_ID, homeFragment).commit();
                 } else if (itemId == R.id.navbar_bookmarks) {
                     fragmentManager.beginTransaction()
-                            .replace(CONTAINER_ID, bookmarksFragment).commit();
+                            .replace(CONTAINER_ID, allRecipesFragment).commit();
                 } else if (itemId == R.id.navbar_add_recipe) {
                     fragmentManager.beginTransaction()
                             .replace(CONTAINER_ID, addRecipeFragment).commit();

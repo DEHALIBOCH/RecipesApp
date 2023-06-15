@@ -22,30 +22,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <SearchView
-            android:id="@+id/search_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/search_view_background"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@null"
-            android:queryHint="@string/home_fragment_search_hint"
-            app:layout_constraintEnd_toStartOf="@id/search_by_voice"
-            app:layout_constraintStart_toStartOf="@id/title_text_view"
-            app:layout_constraintTop_toBottomOf="@id/title_text_view" />
-
-        <ImageButton
-            android:id="@+id/search_by_voice"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:backgroundTint="@color/primary_40"
-            android:contentDescription="@string/voice_search_content_desc"
-            android:scaleType="centerCrop"
-            android:src="@drawable/baseline_keyboard_voice_24"
-            app:layout_constraintBottom_toBottomOf="@id/search_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/search_view" />
 
         <TextView
             android:id="@+id/trending_now_text_view"
@@ -56,7 +32,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_view" />
+            app:layout_constraintTop_toBottomOf="@id/title_text_view" />
 
         <TextView
             android:id="@+id/see_all_trending_recipes"
@@ -75,7 +51,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trending_recipes_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@id/see_all_trending_recipes"
             app:layout_constraintStart_toStartOf="@id/trending_now_text_view"

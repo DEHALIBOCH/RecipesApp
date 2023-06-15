@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.demoapp.recipesapp.Constants;
 import com.demoapp.recipesapp.MainActivity;
@@ -22,6 +23,7 @@ import com.demoapp.recipesapp.data.User;
 import com.demoapp.recipesapp.databinding.FragmentHomeBinding;
 import com.demoapp.recipesapp.domain.firebase.FirebaseUtils;
 import com.demoapp.recipesapp.domain.firebase.UserCallback;
+import com.demoapp.recipesapp.fragments.recyclerutils.PopularCreatorsAdapter;
 import com.demoapp.recipesapp.fragments.recyclerutils.homefragment.RecipesAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,6 +35,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private RecipeViewModel viewModel;
     private RecipesAdapter adapter;
+    private PopularCreatorsAdapter authorsAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -40,6 +43,15 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         initRecyclerView(requireContext());
+        initAuthorsRecyclerView(requireContext());
+
+        binding.seeAllTrendingRecipes.setOnClickListener(view -> {
+            AllRecipesFragment allRecipesFragment = new AllRecipesFragment();
+            getParentFragmentManager().beginTransaction().replace(
+                    R.id.fragment_container_view,
+                    allRecipesFragment
+            ).addToBackStack("allRecipesFragment").commit();
+        });
 
         return binding.getRoot();
     }
@@ -51,6 +63,8 @@ public class HomeFragment extends Fragment {
     private void hideProgressBar() {
         binding.loadingProgressBar.getRoot().setVisibility(View.GONE);
     }
+
+    // TODO протестить
 
 
     private void initUser() {
@@ -88,6 +102,20 @@ public class HomeFragment extends Fragment {
                 recipesReady(list);
             }
         });
+
+        viewModel.usersList.observe(getViewLifecycleOwner(), new Observer<ArrayList<User>>() {
+            @Override
+            public void onChanged(ArrayList<User> users) {
+                authorsReady(users);
+            }
+        });
+    }
+
+    private void initAuthorsRecyclerView(Context context) {
+        authorsAdapter = new PopularCreatorsAdapter(new ArrayList<>());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
+        binding.popularCreatorsRecyclerView.setLayoutManager(layoutManager);
+        binding.popularCreatorsRecyclerView.setAdapter(authorsAdapter);
     }
 
     /**
@@ -108,5 +136,15 @@ public class HomeFragment extends Fragment {
     private void recipesReady(ArrayList<Recipe> list) {
         Collections.shuffle(list);
         adapter.setRecipesList(list);
+    }
+
+    /**
+     * Метод вызывается когда авторы пришли с сервера, передает их в адаптер и уведомляет его.
+     *
+     * @param list Список авторов
+     */
+    private void authorsReady(ArrayList<User> list) {
+        Collections.shuffle(list);
+        authorsAdapter.setAuthorsList(list);
     }
 }

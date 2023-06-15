@@ -157,9 +157,35 @@ public class FirebaseUtils {
     }
 
     /**
+     * Достает из базы данных список всех пользователей
+     *
+     * @param usersCallback Коллбек для обработки результата
+     */
+    public void getAllUsers(AllUsersCallback usersCallback) {
+        Query query = users.orderByKey();
+
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<User> userArrayList = new ArrayList<>();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    User u = ds.getValue(User.class);
+                    userArrayList.add(u);
+                }
+                usersCallback.usersReady(userArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                usersCallback.unsuccessful(error);
+            }
+        });
+    }
+
+    /**
      * Возвращает рецепты размещенные пользователем
      *
-     * @param userUid Идентификатор автора
+     * @param userUid         Идентификатор автора
      * @param recipesCallback Коллбек для обработки ответа
      */
     public void getUserRecipes(String userUid, RecipesCallback recipesCallback) {
