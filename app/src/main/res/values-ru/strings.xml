@@ -46,10 +46,10 @@
     <string name="add_new_ingredient">Добавить ингредиент</string>
     <string name="save_my_recipe">Сохранить рецепт</string>
     <string name="recipe_process">Процесс приготовления</string>
-    <string name="item_name">Название продукта</string>
-    <string name="quantity">Количество</string>
-    <string name="serves_hint">количество порций</string>
-    <string name="cook_time_hint">время приготовления</string>
+    <string name="item_name">Продукт</string>
+    <string name="quantity">Кол-во</string>
+    <string name="serves_hint">кол-во</string>
+    <string name="cook_time_hint">время</string>
     <string name="category_hint">категория</string>
     <string name="img_upload_success">Изображение успешно загружено</string>
     <string name="img_upload_failure">Ошибка при загрузке изображения</string>
@@ -71,4 +71,5 @@
     <string name="no">Нет</string>
     <string name="items_count">%1$d Ингредиентов</string>
     <string name="ingredient_count">%1$dгр</string>
+    <string name="welcome_activity_title_text">Давайте говить вместе</string>
 </resources>

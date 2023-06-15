@@ -77,6 +77,7 @@
     <string name="no">No</string>
     <string name="items_count">%1$d Items</string>
     <string name="ingredient_count">%1$dg</string>
+    <string name="welcome_activity_title_text">Let`s Cooking</string>
     <string-array name="recipe_category">
         <item>Appetizer</item>
         <item>Cold platter</item>
