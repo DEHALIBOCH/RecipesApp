@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Easy Meal</string>
-    <string name="welcome_activity_main_text">Находите лучшие рецепты</string>
+    <string name="welcome_activity_main_text">Находите лучшие \nрецепты</string>
     <string name="start_cooking">Начать готовить</string>
     <string name="not_yet_registered">Еще не зарегистрированы?,  зарегистрироваться</string>
     <string name="sign_in">Войти</string>
@@ -30,7 +30,7 @@
     <string name="add_recipe">Добавить рецепт</string>
     <string name="profile">Профиль</string>
     <string name="add_new_recipe">Добавить новый рецепт</string>
-    <string name="home_fragment_title">Находите лучшие рецепты</string>
+    <string name="home_fragment_title">Лучшие рецепты</string>
     <string name="trending_now">Сейчас в  тренде 🔥</string>
     <string name="see_all">Посмотреть все</string>
     <string name="popular_creators">Популярные авторы</string>
@@ -71,5 +71,4 @@
     <string name="no">Нет</string>
     <string name="items_count">%1$d Ингредиентов</string>
     <string name="ingredient_count">%1$dгр</string>
-    <string name="welcome_activity_title_text">Давайте говить вместе</string>
 </resources>

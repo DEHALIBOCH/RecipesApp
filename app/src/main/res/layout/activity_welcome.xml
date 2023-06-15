@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:foreground="#58000000">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,11 +22,11 @@
 
     <TextView
         android:id="@+id/title_text_view"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="8dp"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:lineSpacingExtra="4sp"
         android:text="@string/welcome_activity_title_text"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -43,6 +44,7 @@
         android:text="@string/welcome_activity_main_text"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:gravity="center"
         android:layout_marginBottom="48dp"
         app:layout_constraintBottom_toTopOf="@+id/button_start_cooking"
         app:layout_constraintEnd_toEndOf="@+id/button_start_cooking"
