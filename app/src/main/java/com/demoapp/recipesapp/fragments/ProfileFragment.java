@@ -109,7 +109,6 @@ public class ProfileFragment extends Fragment {
     private void setEnabledForAllElements(boolean isEnabled) {
         binding.avatarImageView.setEnabled(isEnabled);
         binding.editProfileButton.setEnabled(isEnabled);
-        binding.logoutButton.setEnabled(isEnabled);
         binding.userRecipesRecyclerView.setEnabled(isEnabled);
     }
 
