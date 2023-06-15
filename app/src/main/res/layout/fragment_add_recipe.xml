@@ -219,29 +219,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recipe_category_picker" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ingredients_recycler_view"
+        <EditText
+            android:id="@+id/ingredients_edit_text"
             android:layout_width="match_parent"
+            android:inputType="textMultiLine"
             android:layout_height="300dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ingredientsText" />
 
-        <TextView
-            android:id="@+id/add_new_ingredient_to_recycler"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@string/add_new_ingredient"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:drawableStartCompat="@drawable/baseline_add_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/ingredients_recycler_view"
-            app:layout_constraintTop_toBottomOf="@id/ingredients_recycler_view" />
 
         <EditText
             android:id="@+id/recipe_process_edit_text"
@@ -257,7 +244,7 @@
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_new_ingredient_to_recycler" />
+            app:layout_constraintTop_toBottomOf="@id/ingredients_edit_text" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_my_recipe_button"

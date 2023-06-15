@@ -45,7 +45,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         Context context = holder.itemView.getContext();
         String recipeOverview = context.getString(
                 R.string.recipe_overview,
-                currRecipe.getIngredients().size(),
                 currRecipe.getCookTime(),
                 currRecipe.getCategory()
         );

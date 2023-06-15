@@ -58,21 +58,15 @@ public class AddRecipeFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentAddRecipeBinding.inflate(inflater, container, false);
 
-        initIngredientsRecyclerView(requireContext());
+//        initIngredientsRecyclerView(requireContext());
 
         firebaseUtils = new FirebaseUtils();
 
         binding.saveMyRecipeButton.setOnClickListener(view -> {
-            binding.ingredientsRecyclerView.getAdapter().notifyDataSetChanged();
+//            binding.ingredientsRecyclerView.getAdapter().notifyDataSetChanged();
             Recipe recipe = createRecipe();
             uploadRecipeToFirebase(recipe);
 
-        });
-
-        binding.addNewIngredientToRecycler.setOnClickListener(view -> {
-            ingredientsAdapter.addEmptyIngredient();
-            int pos = ingredientsAdapter.getItemCount() - 1;
-            ingredientsAdapter.notifyItemInserted(pos);
         });
 
         binding.imagePickImageView.setOnClickListener(view -> {
@@ -122,8 +116,7 @@ public class AddRecipeFragment extends Fragment {
         binding.servesCountEditText.setEnabled(isEnabled);
         binding.cookTimeCountEditText.setEnabled(isEnabled);
         binding.recipeCategorySpinner.setEnabled(isEnabled);
-        binding.addNewIngredientToRecycler.setEnabled(isEnabled);
-        binding.ingredientsRecyclerView.setEnabled(isEnabled);
+        binding.ingredientsEditText.setEnabled(isEnabled);
         binding.recipeProcessEditText.setEnabled(isEnabled);
         binding.saveMyRecipeButton.setEnabled(isEnabled);
     }
@@ -266,6 +259,11 @@ public class AddRecipeFragment extends Fragment {
             flag = false;
         }
 
+        if (binding.ingredientsEditText.getText().toString().isEmpty()) {
+            binding.ingredientsEditText.setError(getString(R.string.invalid_data));
+            flag = false;
+        }
+
         return flag;
     }
 
@@ -288,14 +286,14 @@ public class AddRecipeFragment extends Fragment {
         int servesCount = Integer.parseInt(binding.servesCountEditText.getText().toString());
         int cookTime = Integer.parseInt(binding.cookTimeCountEditText.getText().toString());
         String recipeProcess = binding.recipeProcessEditText.getText().toString();
-        LinkedHashMap<String, Integer> ingredients = getIngredientsHashMap();
+        String ingredients = binding.ingredientsEditText.getText().toString();
         String category = binding.recipeCategorySpinner.getSelectedItem().toString();
         recipe.setTitle(title);
         recipe.setCategory(category);
         recipe.setServes(servesCount);
         recipe.setCookTime(cookTime);
         recipe.setRecipe(recipeProcess);
-        recipe.setIngredients(ingredients);
+        recipe.setIngredientsStr(ingredients);
 
         return recipe;
     }
@@ -305,24 +303,18 @@ public class AddRecipeFragment extends Fragment {
      *
      * @return Map где key - название ингредиента, value - кол-во.
      */
-    private LinkedHashMap<String, Integer> getIngredientsHashMap() {
-        LinkedHashMap<String, Integer> ingredients = new LinkedHashMap<>();
-        ArrayList<String> names = ingredientsAdapter.ingredientNames;
-        ArrayList<Integer> quantity = ingredientsAdapter.ingredientQuantities;
-        for (int i = 0; i < names.size(); i++) {
-            ingredients.put(names.get(i), quantity.get(i));
-        }
-        if (ingredients.isEmpty()) {
-            ingredients.put("ingredient", 67);
-        }
-        return ingredients;
-    }
+//    private HashMap<String, Integer> getIngredientsHashMap() {
+//        LinkedHashMap<String, Integer> ingredients = new LinkedHashMap<>();
+//
+//
+//        return ingredients;
+//    }
 
-    private void initIngredientsRecyclerView(Context context) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-        binding.ingredientsRecyclerView.setLayoutManager(linearLayoutManager);
-        ingredientsAdapter = new IngredientsAdapter();
-        binding.ingredientsRecyclerView.setAdapter(ingredientsAdapter);
-    }
+//    private void initIngredientsRecyclerView(Context context) {
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+//        binding.ingredientsRecyclerView.setLayoutManager(linearLayoutManager);
+//        ingredientsAdapter = new IngredientsAdapter();
+//        binding.ingredientsRecyclerView.setAdapter(ingredientsAdapter);
+//    }
 
 }

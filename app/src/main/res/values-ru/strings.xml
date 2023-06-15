@@ -62,7 +62,7 @@
     <string name="type_lastname">Введите вашу фамилию</string>
     <string name="type_age">Введите ваш возраст</string>
     <string name="commit">Подтвердить</string>
-    <string name="recipe_overview">%1$d Ингредиентов | %2$d мин | %3$s</string>
+    <string name="recipe_overview"> %1$d мин | %2$s</string>
     <string name="please_add_photo">Пожалуйста добавьте фотографию к рецепту</string>
     <string name="type_bio">Введите информацию о себе</string>
     <string name="logout">Выйти</string>

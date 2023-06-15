@@ -68,7 +68,7 @@
     <string name="type_lastname">Type your lastname</string>
     <string name="type_age">Type your age</string>
     <string name="commit">Commit</string>
-    <string name="recipe_overview">%1$d Ingredients | %2$d min | %3$s</string>
+    <string name="recipe_overview">%1$d min | %2$s</string>
     <string name="please_add_photo">Please add photo to recipe</string>
     <string name="type_bio">Type information about you</string>
     <string name="logout">Logout</string>

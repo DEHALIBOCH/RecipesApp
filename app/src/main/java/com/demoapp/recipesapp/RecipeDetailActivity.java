@@ -75,14 +75,18 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
         binding.authorTextView.setText(user.getName() + "" + user.getLastname());
         StringBuilder ingredients = new StringBuilder();
-        recipe.getIngredients().forEach((key, value) -> {
-            ingredients.append(n).append(") ").append(key).append(" - ").append(value).append("\n");
-            n++;
-        });
+        if (recipe.getIngredients() != null) {
+            recipe.getIngredients().forEach((key, value) -> {
+                ingredients.append(n).append(") ").append(key).append(" - ").append(value).append("\n");
+                n++;
+            });
+        }
+        if (recipe.getIngredientsStr() != null) {
+            ingredients.append(recipe.getIngredientsStr());
+        }
         binding.recipeTitle.setText(recipe.getTitle());
         binding.ingredientsTextView.setText(ingredients.toString());
         binding.recipeTextView.setText(recipe.getRecipe());
-        binding.ingredientsCountTextView.setText(getString(R.string.items_count, recipe.getIngredients().size()));
         binding.loadingProgressBar.getRoot().setVisibility(View.GONE);
     }
 

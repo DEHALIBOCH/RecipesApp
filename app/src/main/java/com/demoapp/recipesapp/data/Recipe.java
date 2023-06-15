@@ -17,6 +17,16 @@ public class Recipe implements Serializable {
     private int serves; // Кол-во порций
     private int cookTime;   // Время приготовления
     private HashMap<String, Integer> ingredients;    // Ингридиенты
+
+    public String getIngredientsStr() {
+        return ingredientsStr;
+    }
+
+    public void setIngredientsStr(String ingredientsStr) {
+        this.ingredientsStr = ingredientsStr;
+    }
+
+    private String ingredientsStr;
     private String recipe;  // Рецептура(процесс приготовления)
     private String authorUID; // Идентификатор автора
     private String firebaseKey; // Ключ в файрбейзе

@@ -80,19 +80,19 @@ public class ProfileFragment extends Fragment {
 
         showProgressBar();
 
-        getCurrentUser(firebaseAuth.getUid());
+        getCurrentUser(requireContext(), firebaseAuth.getUid());
 
         return binding.getRoot();
     }
 
-    private void getCurrentUser(String uid) {
+    private void getCurrentUser(Context context, String uid) {
         firebaseUtils.getUserByUID(uid, new UserCallback() {
             @Override
             public void userReady(User user) {
                 currUser = user;
                 viewModel.user = user;
                 updateUserInfo(currUser);
-                getUserRecipes(currUser.getTokenUID());
+                getUserRecipes(context, currUser.getTokenUID());
                 hideProgressBar();
             }
 
@@ -145,12 +145,12 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
-    private void getUserRecipes(String userUid) {
+    private void getUserRecipes(Context context, String userUid) {
         firebaseUtils.getUserRecipes(userUid, new RecipesCallback() {
             @Override
             public void successful(ArrayList<Recipe> list) {
                 if (!list.isEmpty()) {
-                    initRecyclerView(list);
+                    initRecyclerView(context, list);
                 }
             }
 
@@ -161,9 +161,9 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void initRecyclerView(ArrayList<Recipe> list) {
+    private void initRecyclerView(Context context, ArrayList<Recipe> list) {
         RecipesAdapter recipesAdapter = new RecipesAdapter(list);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         binding.userRecipesRecyclerView.setAdapter(recipesAdapter);
         binding.userRecipesRecyclerView.setLayoutManager(layoutManager);
     }
